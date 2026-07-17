@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import {
-  ArrowRight, BookOpen, Code2, FileText, GraduationCap, Lightbulb, Mail, Send, Wrench,
+  ArrowRight, BookOpen, CheckCircle, Code2, ExternalLink,
+  GraduationCap, Mail, Send, Wrench,
 } from 'lucide-react'
 
 const MotionSection = motion.section
@@ -20,23 +21,20 @@ const stagger = {
 
 const identity = {
   name: 'John Klien Villanueva',
-  role: '4th Year BSIT Student | Aspiring Developer',
-  heroTitle: '4th Year BSIT Student at Jose Rizal University',
+  heroTitle: '4th Year BSIT &middot; Jose Rizal University',
   course: 'BSIT 402 — ITC-C508',
   email: 'johnklien.villanueva@my.jru.edu',
-  github: 'https://github.com/johnklienvillanueva',
-  aboutPreview: 'A fourth-year Information Technology student focused on building practical software solutions and documenting academic growth through this ePortfolio.',
-  fullBio: 'I am John Klien Villanueva, a 4th year Bachelor of Science in Information Technology student at Jose Rizal University. I am building my foundation in software development, data analysis, and modern web technologies. This ePortfolio serves as a workspace and record of my academic learning for ITC-C508, showcasing my projects, reflections, and competencies.',
+  aboutPreview: 'Building practical software solutions and documenting the journey through this ePortfolio — a workspace and record of academic learning for ITC-C508.',
+  fullBio: 'I am John Klien Villanueva, a 4th year Bachelor of Science in Information Technology student at Jose Rizal University. I focus on software development, data analysis, and modern web technologies. This ePortfolio showcases my projects, reflections, and growing competencies in IT.',
 }
 
-const technicalSkills = {
-  core: ['Python', 'JavaScript', 'PHP', 'SQL', 'Data Structures'],
-  web: ['React', 'Laravel', 'Tailwind CSS', 'REST APIs', 'Git'],
-  tools: ['VS Code', 'GitHub', 'Jupyter Notebook', 'Figma', 'Postman'],
+const skills = {
+  core: ['Python', 'JavaScript', 'PHP', 'SQL', 'React', 'Laravel', 'Tailwind CSS', 'REST APIs'],
+  tools: ['VS Code', 'Git', 'GitHub', 'Figma', 'Postman', 'Jupyter Notebook'],
 }
 
 const education = [
-  { school: 'Jose Rizal University', degree: 'Bachelor of Science in Information Technology', level: '4th Year (Currently Enrolled)' },
+  { school: 'Jose Rizal University', degree: 'BS in Information Technology', level: '4th Year' },
 ]
 
 const courseQA = [
@@ -98,24 +96,17 @@ const courseQA = [
 
 const c508Records = [
   {
-    id: 'c508-1',
-    title: 'Course Expectations Essay',
-    type: 'Written Output',
-    date: 'Due Week 2',
-    description: 'Essay responses on deep learning business applications, NLP conversational systems, and personal course expectations.',
-    status: 'Submitted',
+    id: 'c508-1', title: 'Course Expectations Essay', type: 'Written Output', date: 'Due Week 2',
+    description: 'Essay responses on deep learning business applications, NLP conversational systems, and personal course expectations.', status: 'Submitted',
   },
   {
-    id: 'c508-2',
-    title: 'ePortfolio Design & Implementation',
-    type: 'Hands-on Exercise',
-    date: 'Due Week 2',
-    description: 'Design and implement an ePortfolio space for ITC-C508 that meets rubric criteria for navigation, usability, accessibility, and multimedia elements.',
-    status: 'In Progress',
+    id: 'c508-2', title: 'ePortfolio Design & Implementation', type: 'Hands-on Exercise', date: 'Due Week 2',
+    description: 'Design and implement an ePortfolio space for ITC-C508 compliant with rubric criteria.', status: 'In Progress',
   },
 ]
 
 const periodTabs = ['prelim', 'midterm', 'finals']
+const outputMap = { prelim: [], midterm: [], finals: [] }
 
 const futureProofing = {
   midterm: { heading: 'Midterm', status: 'No Outputs Yet', summary: 'Midterm outputs will appear here once published.', links: [] },
@@ -128,36 +119,29 @@ function HomePage() {
   const [contactErrors, setContactErrors] = useState({})
   const [contactSent, setContactSent] = useState(false)
 
-  const outputMap = { prelim: [], midterm: [], finals: [] }
-
-  const latestProjects = []
-
   const activeOutputs = outputMap[outputTab] ?? []
-
   const future = futureProofing[outputTab]
+
+  const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
 
   const validateContact = () => {
     const e = {}
-    if (!contactForm.name.trim()) e.name = 'Please enter your name.'
-    if (!contactForm.email.trim()) e.email = 'Please enter your email.'
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactForm.email)) e.email = 'Invalid email format.'
-    if (!contactForm.message.trim()) e.message = 'Please write a message.'
-    else if (contactForm.message.trim().length < 10) e.message = 'At least 10 characters.'
+    if (!contactForm.name.trim()) e.name = 'Required'
+    if (!contactForm.email.trim()) e.email = 'Required'
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactForm.email)) e.email = 'Invalid email'
+    if (!contactForm.message.trim()) e.message = 'Required'
+    else if (contactForm.message.trim().length < 10) e.message = 'At least 10 characters'
     setContactErrors(e)
     return Object.keys(e).length === 0
   }
 
-  const handleContactSubmit = (event) => {
-    event.preventDefault()
+  const handleContactSubmit = (e) => {
+    e.preventDefault()
     setContactSent(false)
     if (!validateContact()) return
     setContactSent(true)
     setContactForm({ name: '', email: '', message: '' })
     setContactErrors({})
-  }
-
-  const scrollTo = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
@@ -168,111 +152,70 @@ function HomePage() {
         variants={stagger}
         initial="hidden"
         animate="show"
-        className="mx-auto grid min-h-screen max-w-6xl items-center gap-12 px-4 pt-20 pb-16 sm:px-6 lg:grid-cols-2"
+        className="relative mx-auto max-w-5xl px-5 pt-24 pb-16 sm:pt-32 sm:pb-20"
       >
-        <MotionDiv variants={fadeUp} className="space-y-5">
-          <p className="font-display text-sm font-semibold uppercase tracking-[0.25em] text-[var(--accent)]">
-            {identity.course}
-          </p>
-          <h1 className="font-display text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
+        <MotionDiv variants={fadeUp} className="max-w-2xl">
+          <p className="section-tag text-xs">{identity.course}</p>
+          <h1 className="mt-4 text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
             {identity.name}
           </h1>
-          <p className="text-lg font-medium opacity-80">{identity.heroTitle}</p>
-          <p className="max-w-xl leading-relaxed opacity-70">
+          <p className="mt-2 text-lg text-[var(--page-text)]/60" dangerouslySetInnerHTML={{ __html: identity.heroTitle }} />
+          <p className="mt-4 max-w-lg leading-relaxed text-[var(--page-text)]/70">
             {identity.aboutPreview}
           </p>
-          <div className="flex flex-wrap gap-3 pt-2">
+          <div className="mt-8 flex flex-wrap gap-3">
             <button
               type="button"
               onClick={() => scrollTo('c508')}
-              className="inline-flex items-center gap-2 rounded-lg bg-[var(--accent)] px-6 py-3 text-base font-semibold text-[#0f172a] transition hover:brightness-110"
+              className="inline-flex items-center gap-2 rounded-xl bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-[#09090b] transition hover:opacity-90"
             >
-              View C508 Records <ArrowRight className="h-4 w-4" />
+              C508 Records <ArrowRight className="h-3.5 w-3.5" />
             </button>
             <button
               type="button"
               onClick={() => scrollTo('outputs')}
-              className="inline-flex items-center gap-2 rounded-lg border border-[var(--card-border)] bg-card px-6 py-3 text-base font-semibold transition hover:opacity-80"
+              className="inline-flex items-center gap-2 rounded-xl border border-[var(--card-border)] bg-card px-5 py-2.5 text-sm font-semibold transition hover:text-[var(--accent)]"
             >
-              All Outputs <FileText className="h-4 w-4" />
+              View Outputs <ExternalLink className="h-3.5 w-3.5" />
             </button>
           </div>
         </MotionDiv>
 
-        <MotionDiv variants={fadeUp} className="relative mx-auto flex h-64 w-64 items-center justify-center sm:h-80 sm:w-80">
-          <div className="absolute inset-0 rounded-full bg-[var(--accent-subtle)] blur-3xl" />
-          <div className="relative flex h-56 w-56 items-center justify-center overflow-hidden rounded-2xl border border-[var(--card-border)] bg-card sm:h-72 sm:w-72">
-            <span className="font-display text-6xl font-bold text-[var(--accent)]">JV</span>
-          </div>
+        <MotionDiv variants={fadeUp} className="absolute -top-10 right-0 hidden select-none lg:block">
+          <span className="font-heading text-[12rem] font-bold leading-none tracking-tighter text-transparent" style={{ WebkitTextStroke: '1px rgba(167,139,250,0.15)' }}>
+            JV
+          </span>
         </MotionDiv>
       </MotionSection>
 
       {/* ─── Course Expectations ─── */}
       <MotionSection
         id="course-expectations"
-        variants={fadeUp}
-        initial="hidden"
-        animate="show"
-        className="mx-auto flex min-h-screen flex-col justify-center px-4 sm:px-6"
-      >
-        <div className="max-w-6xl mx-auto w-full">
-          <MotionDiv className="rounded-2xl border border-[var(--accent)]/20 bg-[var(--accent-subtle)] p-6 sm:p-8">
-            <p className="font-display text-xs font-semibold uppercase tracking-[0.22em] text-[var(--accent)]">
-              ITC-C508
-            </p>
-            <h2 className="mt-2 font-display text-2xl font-bold sm:text-3xl">Course Expectations</h2>
-            <p className="mt-3 max-w-4xl leading-relaxed opacity-80">
-              Based on required readings on deep learning and natural language processing,
-              the following responses outline my understanding and expectations for ITC-C508:
-              E-Business, Higher Education and Intelligence Applications.
-            </p>
-            <div className="mt-6 space-y-4">
-              {courseQA.map((item) => (
-                <div key={item.id} className="overflow-hidden rounded-xl border border-[var(--card-border)] bg-card">
-                  <div className="px-5 py-4">
-                    <p className="font-display text-xs font-semibold uppercase tracking-[0.16em] text-[var(--accent)]">
-                      {item.label}
-                    </p>
-                    <p className="mt-1 text-sm font-medium sm:text-base">{item.question}</p>
-                  </div>
-                  <div className="animate-in border-t border-[var(--card-border)] px-5 py-4 text-sm leading-relaxed opacity-80">
-                    {item.answer}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </MotionDiv>
-        </div>
-      </MotionSection>
-
-      {/* ─── Latest Projects ─── */}
-      <MotionSection
         variants={stagger}
         initial="hidden"
         animate="show"
-        className="mx-auto flex min-h-screen flex-col justify-center px-4 sm:px-6"
+        className="mx-auto max-w-5xl px-5 py-20 sm:py-28"
       >
-        <div className="max-w-6xl mx-auto w-full">
-          <MotionDiv variants={fadeUp} className="mb-6">
-            <h2 className="font-display text-2xl font-bold sm:text-3xl">Latest Projects</h2>
-            <p className="mt-1 text-sm opacity-60">Recent course outputs and artifacts.</p>
-          </MotionDiv>
-          <MotionDiv variants={stagger} className="grid gap-5 md:grid-cols-3">
-            {latestProjects.length > 0 ? (
-              latestProjects.map((project) => (
-                <MotionArticle key={project.id} variants={fadeUp} className="rounded-xl border border-[var(--card-border)] bg-card p-5 hover-card">
-                  <p className="font-display text-xs font-semibold uppercase tracking-[0.14em] text-[var(--accent)]">{project.exerciseLabel}</p>
-                  <h3 className="mt-2 text-xl font-semibold">{project.title}</h3>
-                  <p className="mt-2 line-clamp-2 leading-relaxed opacity-80">{project.description?.problem}</p>
-                </MotionArticle>
-              ))
-            ) : (
-              <MotionDiv variants={fadeUp} className="col-span-full rounded-xl border border-[var(--card-border)] bg-card p-8 text-center opacity-60">
-                <p className="font-display text-xl font-semibold text-[var(--accent)]">No projects yet</p>
-                <p className="mt-2">Projects will appear here once published.</p>
-              </MotionDiv>
-            )}
-          </MotionDiv>
+        <MotionDiv variants={fadeUp} className="max-w-2xl">
+          <p className="section-tag">ITC-C508</p>
+          <h2 className="mt-3 text-3xl font-bold sm:text-4xl">Course Expectations</h2>
+          <p className="mt-3 leading-relaxed text-[var(--page-text)]/60">
+            Responses to the required readings on deep learning and natural language processing for ITC-C508.
+          </p>
+        </MotionDiv>
+
+        <div className="mt-10 space-y-6">
+          {courseQA.map((item) => (
+            <MotionDiv key={item.id} variants={fadeUp} className="rounded-xl border border-[var(--card-border)] bg-card p-6">
+              <p className="font-heading text-xs font-semibold uppercase tracking-wider text-[var(--accent)]">
+                {item.label}
+              </p>
+              <p className="mt-1.5 font-heading text-lg font-semibold">{item.question}</p>
+              <div className="mt-4 border-t border-[var(--card-border)] pt-4 text-sm leading-relaxed text-[var(--page-text)]/70">
+                {item.answer}
+              </div>
+            </MotionDiv>
+          ))}
         </div>
       </MotionSection>
 
@@ -282,61 +225,47 @@ function HomePage() {
         variants={stagger}
         initial="hidden"
         animate="show"
-        className="mx-auto flex min-h-screen flex-col justify-center px-4 sm:px-6"
+        className="mx-auto max-w-5xl px-5 py-20 sm:py-28"
       >
-        <div className="max-w-6xl mx-auto w-full space-y-12">
-          <MotionDiv variants={fadeUp} className="space-y-4">
-            <p className="font-display text-sm font-semibold uppercase tracking-[0.25em] text-[var(--accent)]">About</p>
-            <h2 className="font-display text-3xl font-bold sm:text-4xl">Background & Skills</h2>
-            <p className="max-w-3xl leading-relaxed opacity-70">{identity.fullBio}</p>
+        <MotionDiv variants={fadeUp} className="max-w-2xl">
+          <p className="section-tag">About</p>
+          <h2 className="mt-3 text-3xl font-bold sm:text-4xl">Background</h2>
+          <p className="mt-4 leading-relaxed text-[var(--page-text)]/70">{identity.fullBio}</p>
+        </MotionDiv>
+
+        <div className="mt-10 grid gap-8 sm:grid-cols-2">
+          <MotionDiv variants={fadeUp}>
+            <h3 className="flex items-center gap-2 font-heading text-lg font-semibold"><Code2 className="h-4 w-4 text-[var(--accent)]" /> Skills</h3>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {skills.core.map((s) => (
+                <span key={s} className="rounded-lg border border-[var(--card-border)] bg-card px-3 py-1.5 text-sm text-[var(--page-text)]/70">
+                  {s}
+                </span>
+              ))}
+            </div>
           </MotionDiv>
 
-          <MotionDiv variants={stagger} className="grid gap-6 md:grid-cols-3">
-            <MotionDiv variants={fadeUp} className="rounded-xl border border-[var(--card-border)] bg-card p-6">
-              <h3 className="mb-4 inline-flex items-center gap-2 font-display text-xl font-semibold">
-                <Code2 className="h-5 w-5 text-[var(--accent)]" /> Core Skills
-              </h3>
-              <ul className="space-y-2 text-sm opacity-70">
-                {technicalSkills.core.map((s) => (
-                  <li key={s} className="flex items-center gap-2"><span className="h-1 w-1 rounded-full bg-[var(--accent)]" />{s}</li>
-                ))}
-              </ul>
-            </MotionDiv>
-
-            <MotionDiv variants={fadeUp} className="rounded-xl border border-[var(--card-border)] bg-card p-6">
-              <h3 className="mb-4 inline-flex items-center gap-2 font-display text-xl font-semibold">
-                <BookOpen className="h-5 w-5 text-[var(--accent)]" /> Web Stack
-              </h3>
-              <ul className="space-y-2 text-sm opacity-70">
-                {technicalSkills.web.map((s) => (
-                  <li key={s} className="flex items-center gap-2"><span className="h-1 w-1 rounded-full bg-[var(--accent)]" />{s}</li>
-                ))}
-              </ul>
-            </MotionDiv>
-
-            <MotionDiv variants={fadeUp} className="rounded-xl border border-[var(--card-border)] bg-card p-6">
-              <h3 className="mb-4 inline-flex items-center gap-2 font-display text-xl font-semibold">
-                <Wrench className="h-5 w-5 text-[var(--accent)]" /> Tools
-              </h3>
-              <ul className="space-y-2 text-sm opacity-70">
-                {technicalSkills.tools.map((s) => (
-                  <li key={s} className="flex items-center gap-2"><span className="h-1 w-1 rounded-full bg-[var(--accent)]" />{s}</li>
-                ))}
-              </ul>
-            </MotionDiv>
+          <MotionDiv variants={fadeUp}>
+            <h3 className="flex items-center gap-2 font-heading text-lg font-semibold"><Wrench className="h-4 w-4 text-[var(--accent)]" /> Tools</h3>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {skills.tools.map((s) => (
+                <span key={s} className="rounded-lg border border-[var(--card-border)] bg-card px-3 py-1.5 text-sm text-[var(--page-text)]/70">
+                  {s}
+                </span>
+              ))}
+            </div>
           </MotionDiv>
 
-          <MotionDiv variants={fadeUp} className="rounded-xl border border-[var(--card-border)] bg-card p-6">
-            <h3 className="mb-4 inline-flex items-center gap-2 font-display text-xl font-semibold">
-              <GraduationCap className="h-5 w-5 text-[var(--accent)]" /> Education
-            </h3>
-            {education.map((entry) => (
-              <div key={entry.school} className="space-y-1">
-                <p className="font-semibold">{entry.school}</p>
-                <p className="text-sm opacity-70">{entry.degree}</p>
-                <p className="text-sm opacity-50">{entry.level}</p>
-              </div>
-            ))}
+          <MotionDiv variants={fadeUp} className="sm:col-span-2">
+            <h3 className="flex items-center gap-2 font-heading text-lg font-semibold"><GraduationCap className="h-4 w-4 text-[var(--accent)]" /> Education</h3>
+            <div className="mt-3 rounded-xl border border-[var(--card-border)] bg-card p-5">
+              {education.map((e) => (
+                <div key={e.school}>
+                  <p className="font-semibold">{e.school}</p>
+                  <p className="text-sm text-[var(--page-text)]/60">{e.degree} &middot; {e.level}</p>
+                </div>
+              ))}
+            </div>
           </MotionDiv>
         </div>
       </MotionSection>
@@ -347,59 +276,40 @@ function HomePage() {
         variants={stagger}
         initial="hidden"
         animate="show"
-        className="mx-auto flex min-h-screen flex-col justify-center px-4 sm:px-6"
+        className="mx-auto max-w-5xl px-5 py-20 sm:py-28"
       >
-        <div className="max-w-6xl mx-auto w-full space-y-10">
-          <MotionDiv variants={fadeUp} className="space-y-3">
-            <p className="font-display text-sm font-semibold uppercase tracking-[0.25em] text-[var(--accent)]">ITC-C508</p>
-            <h2 className="font-display text-3xl font-bold sm:text-4xl">E-Business: Higher Education & Intelligence Applications</h2>
-            <p className="max-w-3xl leading-relaxed opacity-80">
-              This section serves as the workspace and record of academic learning for ITC-C508.
-              Course outputs, projects, and competency demonstrations are documented here as they are completed throughout the term.
-            </p>
-          </MotionDiv>
+        <MotionDiv variants={fadeUp} className="max-w-2xl">
+          <p className="section-tag">ITC-C508</p>
+          <h2 className="mt-3 text-3xl font-bold sm:text-4xl">E-Business: Higher Education &amp; Intelligence Applications</h2>
+          <p className="mt-3 leading-relaxed text-[var(--page-text)]/60">
+            Workspace and record of academic learning for ITC-C508. Course outputs and projects are documented here throughout the term.
+          </p>
+        </MotionDiv>
 
-          <MotionDiv variants={stagger} className="grid gap-5 sm:grid-cols-2">
-            {c508Records.map((record) => (
-              <MotionArticle key={record.id} variants={fadeUp} className="rounded-xl border border-[var(--card-border)] bg-card p-6 hover-card">
-                <div className="flex items-start justify-between gap-3">
-                  <div className="space-y-1">
-                    <p className="font-display text-xs font-semibold uppercase tracking-[0.16em] text-[var(--accent)]">{record.type}</p>
-                    <h3 className="text-xl font-semibold">{record.title}</h3>
-                  </div>
-                  <span className={`shrink-0 rounded-full px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${
-                    record.status === 'Submitted'
-                      ? 'bg-emerald-500/15 text-emerald-400'
-                      : 'bg-[var(--accent-subtle)] text-[var(--accent)]'
-                  }`}>
-                    {record.status}
-                  </span>
+        <MotionDiv variants={stagger} className="mt-10 space-y-4">
+          {c508Records.map((record) => (
+            <MotionArticle key={record.id} variants={fadeUp} className="group relative rounded-xl border border-[var(--card-border)] bg-card p-5">
+              <div className="flex items-start justify-between gap-4">
+                <div className="space-y-1">
+                  <p className="font-heading text-xs font-semibold uppercase tracking-wider text-[var(--accent)]">
+                    {record.type}
+                  </p>
+                  <h3 className="font-heading text-lg font-semibold">{record.title}</h3>
+                  <p className="text-sm leading-relaxed text-[var(--page-text)]/60">{record.description}</p>
+                  <p className="text-xs text-[var(--page-text)]/40">{record.date}</p>
                 </div>
-                <p className="mt-3 leading-relaxed opacity-80">{record.description}</p>
-                <div className="mt-4 flex items-center gap-4 text-xs opacity-40">
-                  <span className="inline-flex items-center gap-1"><FileText className="h-3 w-3" />{record.date}</span>
-                </div>
-              </MotionArticle>
-            ))}
-          </MotionDiv>
-
-          <MotionDiv variants={fadeUp} className="rounded-2xl border border-[var(--card-border)] bg-card p-6 sm:flex sm:items-start sm:gap-5 sm:p-8">
-            <Lightbulb className="mb-3 h-6 w-6 shrink-0 text-[var(--accent)] sm:mb-0 sm:mt-1" />
-            <div className="space-y-3">
-              <h3 className="font-display text-lg font-bold">About This Course</h3>
-              <p className="leading-relaxed opacity-80">
-                ITC-C508 explores the intersection of e-business strategies, higher education
-                frameworks, and intelligent technologies. The course covers deep learning,
-                natural language processing, and how these technologies drive business
-                innovation and educational transformation.
-              </p>
-              <div className="flex items-center gap-2 text-xs opacity-40">
-                <BookOpen className="h-3 w-3" />
-                Jose Rizal University &middot; BSIT 402
+                <span className={`shrink-0 rounded-lg px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider ${
+                  record.status === 'Submitted'
+                    ? 'bg-emerald-500/10 text-emerald-400'
+                    : 'bg-[var(--accent-subtle)] text-[var(--accent)]'
+                }`}>
+                  {record.status === 'Submitted' && <CheckCircle className="mr-1 inline h-3 w-3" />}
+                  {record.status}
+                </span>
               </div>
-            </div>
-          </MotionDiv>
-        </div>
+            </MotionArticle>
+          ))}
+        </MotionDiv>
       </MotionSection>
 
       {/* ─── Outputs ─── */}
@@ -408,57 +318,53 @@ function HomePage() {
         variants={stagger}
         initial="hidden"
         animate="show"
-        className="mx-auto flex min-h-screen flex-col justify-center px-4 sm:px-6"
+        className="mx-auto max-w-5xl px-5 py-20 sm:py-28"
       >
-        <div className="max-w-6xl mx-auto w-full space-y-8">
-          <MotionDiv variants={fadeUp} className="space-y-3">
-            <p className="font-display text-sm font-semibold uppercase tracking-[0.22em] text-[var(--accent)]">
-              {outputTab.charAt(0).toUpperCase() + outputTab.slice(1)} Period
-            </p>
-            <h2 className="font-display text-3xl font-bold sm:text-4xl">Course Outputs</h2>
-            <p className="max-w-3xl leading-relaxed opacity-80">
-              Browse projects by period. Each entry includes the output, description, skills, and reflection.
-            </p>
-          </MotionDiv>
+        <MotionDiv variants={fadeUp} className="max-w-2xl">
+          <p className="section-tag">{outputTab.charAt(0).toUpperCase() + outputTab.slice(1)}</p>
+          <h2 className="mt-3 text-3xl font-bold sm:text-4xl">Course Outputs</h2>
+          <p className="mt-3 leading-relaxed text-[var(--page-text)]/60">
+            Browse projects by period. Add your outputs to get started.
+          </p>
+        </MotionDiv>
 
-          <MotionDiv variants={fadeUp} className="flex flex-wrap gap-3">
-            {periodTabs.map((tab) => (
-              <button
-                key={tab}
-                type="button"
-                onClick={() => setOutputTab(tab)}
-                className={`rounded-lg px-5 py-2.5 text-base font-semibold transition ${
-                  outputTab === tab
-                    ? 'bg-[var(--accent)] text-[#0f172a]'
-                    : 'border border-[var(--card-border)] bg-card hover:opacity-80'
-                }`}
-              >
-                {tab.charAt(0).toUpperCase() + tab.slice(1)}
-              </button>
-            ))}
-          </MotionDiv>
+        <MotionDiv variants={fadeUp} className="mt-8 flex flex-wrap gap-2">
+          {periodTabs.map((tab) => (
+            <button
+              key={tab}
+              type="button"
+              onClick={() => setOutputTab(tab)}
+              className={`rounded-lg px-4 py-2 text-sm font-semibold transition ${
+                outputTab === tab
+                  ? 'bg-[var(--accent)] text-[#09090b]'
+                  : 'border border-[var(--card-border)] bg-card text-[var(--page-text)]/60 hover:text-[var(--page-text)]'
+              }`}
+            >
+              {tab.charAt(0).toUpperCase() + tab.slice(1)}
+            </button>
+          ))}
+        </MotionDiv>
 
+        <MotionDiv variants={stagger} className="mt-8">
           {activeOutputs.length > 0 ? (
-            <MotionDiv variants={stagger} className="grid gap-6">
+            <div className="space-y-4">
               {activeOutputs.map((item) => (
-                <MotionArticle key={item.id} variants={fadeUp} className="overflow-hidden rounded-2xl border border-[var(--card-border)] bg-card">
-                  <div className="border-b border-[var(--card-border)] px-6 py-4">
-                    <p className="font-display text-xs font-semibold uppercase tracking-[0.14em] text-[var(--accent)]">
-                      {[item.exerciseLabel, item.exerciseCode].filter(Boolean).join(' ')}
-                    </p>
-                    <h3 className="mt-1 text-xl font-semibold">{item.title}</h3>
-                  </div>
+                <MotionArticle key={item.id} variants={fadeUp} className="rounded-xl border border-[var(--card-border)] bg-card p-5">
+                  <p className="font-heading text-xs font-semibold uppercase tracking-wider text-[var(--accent)]">
+                    {[item.exerciseLabel, item.exerciseCode].filter(Boolean).join(' ')}
+                  </p>
+                  <h3 className="mt-1 font-heading text-lg font-semibold">{item.title}</h3>
                 </MotionArticle>
               ))}
-            </MotionDiv>
+            </div>
           ) : (
-            <MotionArticle variants={fadeUp} className="rounded-2xl border border-[var(--card-border)] bg-card p-8 text-center">
-              <p className="font-display text-xl font-semibold text-[var(--accent)]">{future?.heading ?? 'Period'}</p>
-              <h3 className="mt-2 text-2xl font-bold">{future?.status ?? 'Coming Soon'}</h3>
-              <p className="mt-3 mx-auto max-w-2xl leading-relaxed opacity-80">{future?.summary ?? 'No projects published yet for this period.'}</p>
+            <MotionArticle variants={fadeUp} className="rounded-xl border border-[var(--card-border)] bg-card p-8 text-center">
+              <p className="font-heading text-lg font-semibold text-[var(--accent)]">{future?.heading ?? 'Period'}</p>
+              <h3 className="mt-1 text-2xl font-bold">{future?.status ?? 'Coming Soon'}</h3>
+              <p className="mt-2 text-sm text-[var(--page-text)]/60">{future?.summary ?? 'No projects published yet.'}</p>
             </MotionArticle>
           )}
-        </div>
+        </MotionDiv>
       </MotionSection>
 
       {/* ─── Contact ─── */}
@@ -467,43 +373,49 @@ function HomePage() {
         variants={fadeUp}
         initial="hidden"
         animate="show"
-        className="mx-auto flex min-h-screen flex-col justify-center px-4 sm:px-6"
+        className="mx-auto max-w-3xl px-5 py-20 sm:py-28"
       >
-        <div className="w-full max-w-6xl mx-auto grid gap-8 lg:grid-cols-[1fr,1.2fr]">
-          <MotionDiv variants={fadeUp} className="space-y-4 rounded-xl border border-[var(--card-border)] bg-card p-6">
-            <p className="font-display text-sm font-semibold uppercase tracking-[0.25em] text-[var(--accent)]">Contact</p>
-            <h2 className="font-display text-3xl font-bold">Get in Touch</h2>
-            <p className="leading-relaxed opacity-80">Have a question or collaboration idea? Feel free to reach out.</p>
-            <div className="space-y-2 pt-2">
-              <a href={`mailto:${identity.email}`} className="inline-flex items-center gap-2 text-base font-medium text-[var(--accent)] hover:underline">
-                <Mail className="h-5 w-5" /> {identity.email}
-              </a>
-            </div>
-          </MotionDiv>
+        <MotionDiv variants={fadeUp} className="text-center">
+          <p className="section-tag justify-center">Contact</p>
+          <h2 className="mt-3 text-3xl font-bold sm:text-4xl">Get in Touch</h2>
+          <p className="mt-3 text-[var(--page-text)]/60">Have a question? Feel free to reach out.</p>
+        </MotionDiv>
 
-          <form onSubmit={handleContactSubmit} noValidate className="space-y-4 rounded-xl border border-[var(--card-border)] bg-card p-6" aria-label="Contact form">
-            {['name', 'email', 'message'].map((field) => (
-              <div key={field}>
-                <label htmlFor={field} className="mb-1 block text-base font-medium capitalize">{field}</label>
-                {field === 'message' ? (
-                  <textarea id={field} name={field} rows={5} value={contactForm[field]} onChange={(e) => setContactForm({ ...contactForm, [field]: e.target.value })}
-                    className="w-full rounded-lg border border-[var(--card-border)] bg-[var(--page-bg)] px-4 py-3 text-base outline-none transition focus:border-[var(--accent)]"
-                    aria-invalid={Boolean(contactErrors[field])} />
-                ) : (
+        <MotionDiv variants={fadeUp} className="mt-10 rounded-xl border border-[var(--card-border)] bg-card p-6 sm:p-8">
+          <form onSubmit={handleContactSubmit} noValidate aria-label="Contact form" className="space-y-5">
+            <div className="grid gap-5 sm:grid-cols-2">
+              {['name', 'email'].map((field) => (
+                <div key={field}>
+                  <label htmlFor={field} className="mb-1.5 block text-sm font-medium capitalize">{field}</label>
                   <input id={field} name={field} type={field === 'email' ? 'email' : 'text'} value={contactForm[field]}
                     onChange={(e) => setContactForm({ ...contactForm, [field]: e.target.value })}
-                    className="w-full rounded-lg border border-[var(--card-border)] bg-[var(--page-bg)] px-4 py-3 text-base outline-none transition focus:border-[var(--accent)]"
+                    className="w-full rounded-lg border border-[var(--card-border)] bg-[var(--page-bg)] px-4 py-2.5 text-sm outline-none transition focus:border-[var(--accent)]"
                     aria-invalid={Boolean(contactErrors[field])} />
-                )}
-                {contactErrors[field] && <p className="mt-1 text-base text-rose-400">{contactErrors[field]}</p>}
-              </div>
-            ))}
-            <button type="submit" className="inline-flex items-center gap-2 rounded-lg bg-[var(--accent)] px-6 py-3 text-base font-semibold text-[#0f172a] transition hover:brightness-110">
-              <Send className="h-5 w-5" /> Send
-            </button>
-            {contactSent && <p className="text-base text-emerald-500">Message drafted. This demo form is ready for backend integration.</p>}
+                  {contactErrors[field] && <p className="mt-1 text-xs text-rose-400">{contactErrors[field]}</p>}
+                </div>
+              ))}
+            </div>
+            <div>
+              <label htmlFor="message" className="mb-1.5 block text-sm font-medium">Message</label>
+              <textarea id="message" name="message" rows={4} value={contactForm.message}
+                onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
+                className="w-full rounded-lg border border-[var(--card-border)] bg-[var(--page-bg)] px-4 py-2.5 text-sm outline-none transition focus:border-[var(--accent)]"
+                aria-invalid={Boolean(contactErrors.message)} />
+              {contactErrors.message && <p className="mt-1 text-xs text-rose-400">{contactErrors.message}</p>}
+            </div>
+            <div className="flex items-center gap-4">
+              <button type="submit" className="inline-flex items-center gap-2 rounded-xl bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-[#09090b] transition hover:opacity-90">
+                <Send className="h-3.5 w-3.5" /> Send Message
+              </button>
+              {contactSent && <p className="text-sm text-emerald-400/80">Message drafted. Ready for backend integration.</p>}
+            </div>
           </form>
-        </div>
+          <div className="mt-6 pt-6 border-t border-[var(--card-border)]">
+            <a href={`mailto:${identity.email}`} className="inline-flex items-center gap-2 text-sm text-[var(--accent)] hover:underline">
+              <Mail className="h-4 w-4" /> {identity.email}
+            </a>
+          </div>
+        </MotionDiv>
       </MotionSection>
     </>
   )

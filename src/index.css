@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=DM+Sans:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,15 +6,16 @@
 
 @layer base {
   :root {
-    --page-bg: #09090b;
-    --page-text: #f4f4f5;
-    --card-bg: rgba(24, 24, 27, 0.8);
+    --page-bg: #0c0a09;
+    --page-text: #fafaf9;
+    --card-bg: rgba(28, 25, 23, 0.75);
     --card-border: rgba(255, 255, 255, 0.06);
-    --header-bg: rgba(9, 9, 11, 0.85);
+    --header-bg: rgba(12, 10, 9, 0.9);
     --header-border: rgba(255, 255, 255, 0.06);
-    --accent: #a78bfa;
-    --accent-subtle: rgba(167, 139, 250, 0.1);
-    --accent-glow: rgba(167, 139, 250, 0.15);
+    --accent: #fb7185;
+    --accent-subtle: rgba(251, 113, 133, 0.1);
+    --accent-glow: rgba(251, 113, 133, 0.15);
+    --accent-gradient: linear-gradient(135deg, #fb7185, #f97316);
   }
 
   html {
@@ -26,33 +27,31 @@
     margin: 0;
     background: var(--page-bg);
     color: var(--page-text);
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: 'DM Sans', system-ui, sans-serif;
     font-size: 17px;
-    line-height: 1.75;
+    line-height: 1.7;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Space Grotesk', system-ui, sans-serif;
-    font-weight: 600;
-    letter-spacing: -0.01em;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
   }
 
   *:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 2px;
-    border-radius: 4px;
+    border-radius: 6px;
   }
 
   ::selection {
     background: var(--accent);
-    color: #09090b;
+    color: #0c0a09;
   }
 }
 
 @layer utilities {
-  .bg-ambient {
-    background-color: var(--page-bg);
-  }
+  .bg-ambient { background-color: var(--page-bg); }
 
   .bg-card {
     background-color: var(--card-bg);
@@ -62,54 +61,36 @@
   .text-accent { color: var(--accent); }
   .border-accent { border-color: var(--accent); }
   .bg-accent-subtle { background-color: var(--accent-subtle); }
-  .glow-accent { box-shadow: 0 0 30px var(--accent-glow); }
+  .glow-accent { box-shadow: 0 0 24px var(--accent-glow); }
 
   .gradient-text {
-    background: linear-gradient(135deg, #c084fc, #818cf8);
+    background: var(--accent-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  .gradient-border {
-    position: relative;
-  }
-  .gradient-border::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(135deg, rgba(167,139,250,0.3), rgba(129,140,248,0.1));
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: exclude;
-    -webkit-mask-composite: xor;
-    pointer-events: none;
+  .tag {
+    display: inline-block;
+    border-radius: 999px;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    background: var(--accent-subtle);
+    color: var(--accent);
+    border: 1px solid var(--card-border);
   }
 
-  .section-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: 'Space Grotesk', system-ui, sans-serif;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--accent);
-  }
-  .section-tag::before {
-    content: '';
-    width: 1.5rem;
-    height: 1px;
-    background: var(--accent);
+  .card-accent-top {
+    border-top: 2px solid var(--accent);
+    border-radius: 0.75rem;
   }
 
   .hover-card {
     transition: all 0.2s ease;
   }
   .hover-card:hover {
-    background: rgba(24, 24, 27, 1);
+    transform: translateY(-2px);
   }
 
   .animate-in {
@@ -117,7 +98,7 @@
   }
 
   @keyframes fadeSlideIn {
-    from { opacity: 0; transform: translateY(8px); }
+    from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
   }
 }

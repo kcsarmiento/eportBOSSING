@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,39 +6,32 @@
 
 @layer base {
   :root {
-    --page-bg: #f8fafc;
-    --page-text: #0f172a;
+    --page-bg: #f5f0eb;
+    --page-text: #1a1410;
     --card-bg: #ffffff;
     --card-border: rgba(0, 0, 0, 0.06);
-    --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
-    --header-bg: rgba(255, 255, 255, 0.85);
-    --header-border: rgba(0, 0, 0, 0.06);
-    --accent: #6366f1;
-    --accent-subtle: rgba(99, 102, 241, 0.08);
-    --accent-glow: rgba(99, 102, 241, 0.12);
-    --muted: #64748b;
-    --section-alt: #f1f5f9;
+    --accent: #d46a3d;
+    --accent-subtle: rgba(212, 106, 61, 0.08);
+    --muted: #78716c;
+    --nav-bg: rgba(245, 240, 235, 0.9);
+    --section-a: #f5f0eb;
+    --section-b: #ede8e2;
   }
 
   html.dark {
-    --page-bg: #0b1120;
-    --page-text: #e2e8f0;
-    --card-bg: rgba(30, 41, 59, 0.7);
+    --page-bg: #120c08;
+    --page-text: #e7e5e4;
+    --card-bg: rgba(28, 25, 23, 0.7);
     --card-border: rgba(255, 255, 255, 0.06);
-    --card-shadow: none;
-    --header-bg: rgba(11, 17, 32, 0.9);
-    --header-border: rgba(255, 255, 255, 0.06);
-    --accent: #818cf8;
-    --accent-subtle: rgba(129, 140, 248, 0.1);
-    --accent-glow: rgba(129, 140, 248, 0.15);
-    --muted: #94a3b8;
-    --section-alt: rgba(30, 41, 59, 0.3);
+    --accent: #e8845c;
+    --accent-subtle: rgba(232, 132, 92, 0.1);
+    --muted: #a8a29e;
+    --nav-bg: rgba(18, 12, 8, 0.9);
+    --section-a: #120c08;
+    --section-b: #1a1410;
   }
 
-  html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 5rem;
-  }
+  html { scroll-behavior: smooth; }
 
   body {
     margin: 0;
@@ -51,7 +44,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Sora', system-ui, sans-serif;
+    font-family: 'Syne', system-ui, sans-serif;
     font-weight: 700;
     letter-spacing: -0.02em;
   }
@@ -70,44 +63,31 @@
 
 @layer utilities {
   .bg-ambient { background-color: var(--page-bg); }
-  .bg-section-alt { background-color: var(--section-alt); }
-
-  .bg-card {
-    background-color: var(--card-bg);
-    border-color: var(--card-border);
-    box-shadow: var(--card-shadow);
-  }
-
+  .bg-section-a { background-color: var(--section-a); }
+  .bg-section-b { background-color: var(--section-b); }
+  .bg-card { background-color: var(--card-bg); border-color: var(--card-border); }
   .text-accent { color: var(--accent); }
   .border-accent { border-color: var(--accent); }
   .bg-accent-subtle { background-color: var(--accent-subtle); }
   .text-muted { color: var(--muted); }
+  .bg-nav { background-color: var(--nav-bg); }
 
-  .gradient-text {
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  .huge-text {
+    font-family: 'Syne', system-ui, sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
   }
 
-  .badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
+  .chip {
+    display: inline-block;
+    padding: 0.2rem 0.7rem;
     border-radius: 999px;
-    padding: 0.2rem 0.65rem;
-    font-size: 0.7rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .hover-card {
-    transition: all 0.2s ease;
-  }
-  .hover-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px -8px var(--accent-glow);
+    font-size: 0.75rem;
+    font-weight: 500;
+    background: var(--accent-subtle);
+    color: var(--accent);
+    border: 1px solid var(--card-border);
   }
 
   .animate-in {
@@ -115,7 +95,7 @@
   }
 
   @keyframes fadeSlideIn {
-    from { opacity: 0; transform: translateY(10px); }
+    from { opacity: 0; transform: translateY(12px); }
     to { opacity: 1; transform: translateY(0); }
   }
 }

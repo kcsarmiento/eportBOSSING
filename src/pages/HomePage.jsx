@@ -1,9 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import {
-  ArrowRight, BookOpen, CheckCircle, Code2, ExternalLink,
-  GraduationCap, Mail, Send, Wrench,
-} from 'lucide-react'
+import { CheckCircle, GraduationCap, Send } from 'lucide-react'
 
 const MotionSection = motion.section
 const MotionDiv = motion.div
@@ -23,16 +20,10 @@ const identity = {
   name: 'John Klien Villanueva',
   course: 'BSIT 402 — ITC-C508',
   email: 'johnklien.villanueva@my.jru.edu',
-  aboutPreview: '4th year IT student at Jose Rizal University, focused on software development and web technologies.',
-  fullBio: 'I am a 4th year BSIT student at Jose Rizal University with a focus on software development and web technologies. This ePortfolio serves as my workspace and record of learning for ITC-C508 — showcasing projects, reflections, and competencies developed throughout the course.',
+  bio: '4th year IT student at Jose Rizal University focused on software development. This ePortfolio is a workspace and record of my learning for ITC-C508.',
 }
 
-const skills = ['Python', 'JavaScript', 'PHP', 'React', 'Laravel', 'Tailwind CSS', 'REST APIs', 'Git']
-const tools = ['VS Code', 'GitHub', 'Figma', 'Postman', 'Jupyter Notebook']
-
-const education = [
-  { school: 'Jose Rizal University', degree: 'BS Information Technology', level: '4th Year' },
-]
+const skills = ['Python', 'JavaScript', 'React', 'PHP', 'Laravel', 'Tailwind CSS', 'REST APIs', 'Git', 'SQL', 'Figma']
 
 const courseQA = [
   {
@@ -48,7 +39,7 @@ const courseQA = [
           Deep learning models, particularly deep feed-forward neural networks, excel at this task because they can automatically learn hierarchical features from raw data without manual feature engineering. As demonstrated in the readings, a deep learning model trained on billions of call records achieved 77.9% AUC in predicting customer churn, significantly outperforming traditional machine learning approaches like random forests (73.2% AUC). This predictive capability enables companies to proactively intervene with targeted retention offers, improving customer retention by 5% — which studies show can increase profits by 25% to 95%.
         </p>
         <p className="mt-3">
-          However, deep learning models are often criticized as &ldquo;black boxes&rdquo; because their internal decision-making processes are not easily interpretable. To address this challenge, organizations can implement <strong>LIME</strong> (Local Interpretable Model-agnostic Explanations) and <strong>SHAP</strong> (SHapley Additive exPlanations) — post-hoc explainability techniques that approximate which input features most influenced a specific prediction. For churn prediction, these tools reveal whether a customer&apos;s likelihood to churn was driven by factors like decreased usage, unresolved support tickets, or billing issues. Additionally, <strong>attention mechanisms</strong> in neural networks highlight which input parts the model focused on, while <strong>confidence scoring</strong> flags low-certainty predictions for human review. Combining these approaches makes deep learning systems more transparent, interpretable, and trustworthy for business decision-making.
+          However, deep learning models are often criticized as &ldquo;black boxes&rdquo; because their internal decision-making processes are not easily interpretable. To address this challenge, organizations can implement <strong>LIME</strong> (Local Interpretable Model-agnostic Explanations) and <strong>SHAP</strong> (SHapley Additive exPlanations) — post-hoc explainability techniques that approximate which input features most influenced a specific prediction. For churn prediction, these tools reveal whether a customer&apos;s likelihood to churn was driven by factors like decreased usage, unresolved support tickets, or billing issues. Additionally, <strong>attention mechanisms</strong> in neural networks highlight which input parts the model focused on, while <strong>confidence scoring</strong> flags low-certainty predictions for human review. Combining these approaches makes deep learning systems more transparent, interpretable, and trustworthy.
         </p>
       </>
     ),
@@ -93,22 +84,17 @@ const courseQA = [
 
 const c508Records = [
   {
-    id: 'c508-1', title: 'Course Expectations Essay', type: 'Written Output', date: 'Due Week 2',
-    description: 'Essay responses on deep learning business applications, NLP conversational systems, and personal course expectations.', status: 'Submitted',
+    id: 'c508-1', title: 'Course Expectations Essay', type: 'Written Output',
+    description: 'Essay on deep learning, NLP, and personal course expectations.', status: 'Submitted',
   },
   {
-    id: 'c508-2', title: 'ePortfolio Design & Implementation', type: 'Hands-on Exercise', date: 'Due Week 2',
-    description: 'Design and implement an ePortfolio space for ITC-C508 compliant with rubric criteria.', status: 'In Progress',
+    id: 'c508-2', title: 'ePortfolio Design & Implementation', type: 'Exercise',
+    description: 'ePortfolio design compliant with rubric criteria.', status: 'In Progress',
   },
 ]
 
 const periodTabs = ['prelim', 'midterm', 'finals']
 const outputMap = { prelim: [], midterm: [], finals: [] }
-
-const futureProofing = {
-  midterm: { heading: 'Midterm', status: 'No Outputs Yet', summary: 'Midterm outputs will appear here once published.', links: [] },
-  finals: { heading: 'Finals', status: 'Coming Soon', summary: 'Final period outputs will appear in this section.', links: [] },
-}
 
 function HomePage() {
   const [outputTab, setOutputTab] = useState('prelim')
@@ -116,18 +102,13 @@ function HomePage() {
   const [contactErrors, setContactErrors] = useState({})
   const [contactSent, setContactSent] = useState(false)
 
-  const activeOutputs = outputMap[outputTab] ?? []
-  const future = futureProofing[outputTab]
-
-  const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
-
   const validateContact = () => {
     const e = {}
     if (!contactForm.name.trim()) e.name = 'Required'
     if (!contactForm.email.trim()) e.email = 'Required'
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactForm.email)) e.email = 'Invalid email'
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactForm.email)) e.email = 'Invalid'
     if (!contactForm.message.trim()) e.message = 'Required'
-    else if (contactForm.message.trim().length < 10) e.message = 'At least 10 characters'
+    else if (contactForm.message.trim().length < 10) e.message = 'Too short'
     setContactErrors(e)
     return Object.keys(e).length === 0
   }
@@ -149,43 +130,27 @@ function HomePage() {
         variants={stagger}
         initial="hidden"
         animate="show"
-        className="mx-auto max-w-5xl px-6 pt-28 pb-16 sm:pt-36 sm:pb-24"
+        className="min-h-screen flex items-center px-6 sm:px-10"
       >
-        <MotionDiv variants={fadeUp}>
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--accent)]/20 bg-[var(--accent-subtle)] px-3 py-1 text-xs font-semibold text-[var(--accent)]">
-            {identity.course}
-          </span>
-          <h1 className="mt-5 text-[2.5rem] font-extrabold leading-[1.08] tracking-tight sm:text-6xl lg:text-7xl">
-            {identity.name}
-          </h1>
-          <p className="mt-4 max-w-xl text-lg leading-relaxed text-[var(--muted)]">
-            {identity.aboutPreview}
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <button
-              type="button"
-              onClick={() => scrollTo('course-expectations')}
-              className="inline-flex items-center gap-2 rounded-xl bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white transition hover:brightness-110"
-            >
-              Course Expectations <ArrowRight className="h-3.5 w-3.5" />
-            </button>
-            <button
-              type="button"
-              onClick={() => scrollTo('outputs')}
-              className="inline-flex items-center gap-2 rounded-xl border border-[var(--card-border)] bg-[var(--card-bg)] px-5 py-2.5 text-sm font-semibold transition hover:text-[var(--accent)]"
-            >
-              View Outputs <ExternalLink className="h-3.5 w-3.5" />
-            </button>
-          </div>
-        </MotionDiv>
+        <div className="w-full max-w-6xl mx-auto">
+          <MotionDiv variants={fadeUp} className="max-w-4xl">
+            <span className="chip text-xs tracking-widest uppercase">{identity.course}</span>
+            <h1 className="huge-text mt-6 text-[clamp(2.8rem,12vw,7rem)] leading-[0.9]">
+              {identity.name.split(' ')[0]}<br />
+              {identity.name.split(' ').slice(1).join(' ')}
+            </h1>
+          </MotionDiv>
 
-        <MotionDiv variants={fadeUp} className="mt-10 flex flex-wrap gap-2">
-          {skills.slice(0, 6).map((s) => (
-            <span key={s} className="rounded-lg border border-[var(--card-border)] bg-[var(--card-bg)] px-2.5 py-1 text-xs text-[var(--muted)]">
-              {s}
-            </span>
-          ))}
-        </MotionDiv>
+          <MotionDiv variants={fadeUp} className="mt-6 max-w-xl">
+            <p className="text-base sm:text-lg leading-relaxed text-[var(--muted)]">{identity.bio}</p>
+          </MotionDiv>
+
+          <MotionDiv variants={fadeUp} className="mt-10 flex flex-wrap gap-2">
+            {skills.map((s) => (
+              <span key={s} className="rounded-full border border-[var(--card-border)] bg-card px-3 py-1 text-xs text-[var(--muted)]">{s}</span>
+            ))}
+          </MotionDiv>
+        </div>
       </MotionSection>
 
       {/* ─── Course Expectations ─── */}
@@ -194,27 +159,23 @@ function HomePage() {
         variants={stagger}
         initial="hidden"
         animate="show"
-        className="bg-section-alt border-y border-[var(--card-border)] transition-colors"
+        className="bg-section-b border-y border-[var(--card-border)] transition-colors"
       >
-        <div className="mx-auto max-w-5xl px-6 py-20 sm:py-28">
+        <div className="max-w-6xl mx-auto px-6 sm:px-10 py-20 sm:py-28">
           <MotionDiv variants={fadeUp}>
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--accent)]/20 bg-[var(--accent-subtle)] px-3 py-1 text-xs font-semibold text-[var(--accent)]">
-              ITC-C508
-            </span>
-            <h2 className="mt-4 text-3xl font-bold sm:text-4xl">Course Expectations</h2>
-            <p className="mt-3 max-w-2xl leading-relaxed text-[var(--muted)]">
-              Responses to the required readings on deep learning and NLP for ITC-C508.
+            <span className="chip text-xs">ITC-C508</span>
+            <h2 className="huge-text mt-4 text-4xl sm:text-5xl">Course<br />Expectations</h2>
+            <p className="mt-4 max-w-2xl text-[var(--muted)]">
+              Responses to the required readings on deep learning and NLP.
             </p>
           </MotionDiv>
 
-          <div className="mt-10 space-y-5">
+          <div className="mt-12 space-y-6">
             {courseQA.map((item) => (
-              <MotionDiv key={item.id} variants={fadeUp} className="rounded-xl border border-[var(--card-border)] bg-[var(--card-bg)] p-6 sm:p-7">
-                <p className="text-xs font-semibold uppercase tracking-wider text-[var(--accent)]">
-                  {item.label}
-                </p>
-                <p className="mt-1.5 text-lg font-semibold sm:text-xl">{item.question}</p>
-                <div className="mt-4 border-t border-[var(--card-border)] pt-4 text-sm leading-relaxed text-[var(--muted)]">
+              <MotionDiv key={item.id} variants={fadeUp} className="rounded-2xl border border-[var(--card-border)] bg-card p-6 sm:p-8">
+                <p className="text-xs font-semibold uppercase tracking-widest text-[var(--accent)]">{item.label}</p>
+                <p className="mt-2 text-xl font-semibold sm:text-2xl">{item.question}</p>
+                <div className="mt-5 border-t border-[var(--card-border)] pt-5 text-sm leading-relaxed text-[var(--muted)]">
                   {item.answer}
                 </div>
               </MotionDiv>
@@ -223,67 +184,40 @@ function HomePage() {
         </div>
       </MotionSection>
 
-      {/* ─── Latest Projects ─── */}
-      <MotionSection
-        variants={stagger}
-        initial="hidden"
-        animate="show"
-        className="mx-auto max-w-5xl px-6 py-20 sm:py-28"
-      >
-        <MotionDiv variants={fadeUp}>
-          <h2 className="text-3xl font-bold sm:text-4xl">Latest Projects</h2>
-          <p className="mt-3 text-[var(--muted)]">Recent course outputs will appear here.</p>
-        </MotionDiv>
-
-        <MotionDiv variants={fadeUp} className="mt-10 rounded-xl border border-[var(--card-border)] bg-[var(--card-bg)] p-10 text-center">
-          <p className="font-heading text-xl font-semibold text-[var(--accent)]">No projects yet</p>
-          <p className="mt-2 text-sm text-[var(--muted)]">Add your outputs to get started.</p>
-        </MotionDiv>
-      </MotionSection>
-
       {/* ─── About ─── */}
       <MotionSection
         id="about"
         variants={stagger}
         initial="hidden"
         animate="show"
-        className="bg-section-alt border-y border-[var(--card-border)] transition-colors"
+        className="bg-section-a transition-colors"
       >
-        <div className="mx-auto max-w-5xl px-6 py-20 sm:py-28">
+        <div className="max-w-6xl mx-auto px-6 sm:px-10 py-20 sm:py-28">
           <MotionDiv variants={fadeUp}>
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--accent)]/20 bg-[var(--accent-subtle)] px-3 py-1 text-xs font-semibold text-[var(--accent)]">
-              About
-            </span>
-            <h2 className="mt-4 text-3xl font-bold sm:text-4xl">Background &amp; Skills</h2>
-            <p className="mt-4 max-w-2xl leading-relaxed text-[var(--muted)]">{identity.fullBio}</p>
+            <span className="chip text-xs">About</span>
+            <h2 className="huge-text mt-4 text-4xl sm:text-5xl">
+              Background<br />&amp; Skills
+            </h2>
+            <p className="mt-4 max-w-2xl text-[var(--muted)]">{identity.bio}</p>
           </MotionDiv>
 
-          <div className="mt-10 grid gap-5 sm:grid-cols-2">
-            <MotionDiv variants={fadeUp} className="rounded-xl border border-[var(--card-border)] bg-[var(--card-bg)] p-5">
-              <h3 className="flex items-center gap-2 font-heading text-base font-semibold"><Code2 className="h-4 w-4 text-[var(--accent)]" /> Skills</h3>
-              <div className="mt-3 flex flex-wrap gap-1.5">
+          <MotionDiv variants={stagger} className="mt-12 grid gap-5 sm:grid-cols-2">
+            <MotionDiv variants={fadeUp} className="rounded-2xl border border-[var(--card-border)] bg-card p-6">
+              <h3 className="font-heading text-base font-semibold">Skills</h3>
+              <div className="mt-3 flex flex-wrap gap-2">
                 {skills.map((s) => (
-                  <span key={s} className="rounded-lg border border-[var(--card-border)] px-2.5 py-1 text-xs text-[var(--muted)]">{s}</span>
+                  <span key={s} className="rounded-full border border-[var(--card-border)] px-3 py-1 text-xs text-[var(--muted)]">{s}</span>
                 ))}
               </div>
             </MotionDiv>
-            <MotionDiv variants={fadeUp} className="rounded-xl border border-[var(--card-border)] bg-[var(--card-bg)] p-5">
-              <h3 className="flex items-center gap-2 font-heading text-base font-semibold"><Wrench className="h-4 w-4 text-[var(--accent)]" /> Tools</h3>
-              <div className="mt-3 flex flex-wrap gap-1.5">
-                {tools.map((s) => (
-                  <span key={s} className="rounded-lg border border-[var(--card-border)] px-2.5 py-1 text-xs text-[var(--muted)]">{s}</span>
-                ))}
+            <MotionDiv variants={fadeUp} className="rounded-2xl border border-[var(--card-border)] bg-card p-6">
+              <h3 className="font-heading text-base font-semibold">Education</h3>
+              <div className="mt-3 text-sm text-[var(--muted)]">
+                <p className="text-[var(--page-text)] font-medium">Jose Rizal University</p>
+                <p>BS Information Technology &middot; 4th Year</p>
               </div>
             </MotionDiv>
-            <MotionDiv variants={fadeUp} className="sm:col-span-2 rounded-xl border border-[var(--card-border)] bg-[var(--card-bg)] p-5">
-              <h3 className="flex items-center gap-2 font-heading text-base font-semibold"><GraduationCap className="h-4 w-4 text-[var(--accent)]" /> Education</h3>
-              <div className="mt-2 text-sm">
-                {education.map((e) => (
-                  <p key={e.school}><span className="font-medium">{e.school}</span> &middot; {e.degree} &middot; {e.level}</p>
-                ))}
-              </div>
-            </MotionDiv>
-          </div>
+          </MotionDiv>
         </div>
       </MotionSection>
 
@@ -293,42 +227,37 @@ function HomePage() {
         variants={stagger}
         initial="hidden"
         animate="show"
-        className="mx-auto max-w-5xl px-6 py-20 sm:py-28"
+        className="bg-section-b border-y border-[var(--card-border)] transition-colors"
       >
-        <MotionDiv variants={fadeUp}>
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--accent)]/20 bg-[var(--accent-subtle)] px-3 py-1 text-xs font-semibold text-[var(--accent)]">
-            ITC-C508
-          </span>
-          <h2 className="mt-4 text-3xl font-bold sm:text-4xl">Course Records</h2>
-          <p className="mt-3 max-w-2xl text-[var(--muted)]">
-            Academic workspace for ITC-C508 — E-Business: Higher Education and Intelligence Applications.
-          </p>
-        </MotionDiv>
+        <div className="max-w-6xl mx-auto px-6 sm:px-10 py-20 sm:py-28">
+          <MotionDiv variants={fadeUp}>
+            <span className="chip text-xs">ITC-C508</span>
+            <h2 className="huge-text mt-4 text-4xl sm:text-5xl">Course<br />Records</h2>
+            <p className="mt-4 max-w-2xl text-[var(--muted)]">Academic workspace for E-Business: Higher Education and Intelligence Applications.</p>
+          </MotionDiv>
 
-        <MotionDiv variants={stagger} className="mt-10 space-y-4">
-          {c508Records.map((record) => (
-            <MotionArticle key={record.id} variants={fadeUp} className="rounded-xl border border-[var(--card-border)] bg-[var(--card-bg)] p-5 transition hover-card">
-              <div className="flex items-start justify-between gap-4">
-                <div className="space-y-1.5">
-                  <div className="flex items-center gap-2.5">
-                    <span className="text-xs font-semibold uppercase tracking-wider text-[var(--accent)]">{record.type}</span>
-                    <span className={`badge ${
-                      record.status === 'Submitted'
-                        ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
-                        : 'bg-[var(--accent-subtle)] text-[var(--accent)]'
-                    }`}>
-                      {record.status === 'Submitted' && <CheckCircle className="h-2.5 w-2.5" />}
-                      {record.status}
-                    </span>
+          <MotionDiv variants={stagger} className="mt-12 space-y-4">
+            {c508Records.map((record) => (
+              <MotionArticle key={record.id} variants={fadeUp} className="rounded-2xl border border-[var(--card-border)] bg-card p-5 sm:p-6">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <div className="flex items-center gap-3 flex-wrap">
+                      <span className="text-xs font-semibold uppercase tracking-widest text-[var(--accent)]">{record.type}</span>
+                      <span className={`chip !text-[10px] ${
+                        record.status === 'Submitted' ? '!bg-emerald-500/10 !text-emerald-600 dark:!text-emerald-400' : ''
+                      }`}>
+                        {record.status === 'Submitted' && <CheckCircle className="mr-0.5 inline h-2.5 w-2.5" />}
+                        {record.status}
+                      </span>
+                    </div>
+                    <h3 className="mt-2 text-lg font-semibold">{record.title}</h3>
+                    <p className="mt-1 text-sm text-[var(--muted)]">{record.description}</p>
                   </div>
-                  <h3 className="text-lg font-semibold">{record.title}</h3>
-                  <p className="text-sm text-[var(--muted)]">{record.description}</p>
-                  <p className="text-xs text-[var(--muted)]/60">{record.date}</p>
                 </div>
-              </div>
-            </MotionArticle>
-          ))}
-        </MotionDiv>
+              </MotionArticle>
+            ))}
+          </MotionDiv>
+        </div>
       </MotionSection>
 
       {/* ─── Outputs ─── */}
@@ -337,15 +266,13 @@ function HomePage() {
         variants={stagger}
         initial="hidden"
         animate="show"
-        className="bg-section-alt border-y border-[var(--card-border)] transition-colors"
+        className="bg-section-a transition-colors"
       >
-        <div className="mx-auto max-w-5xl px-6 py-20 sm:py-28">
+        <div className="max-w-6xl mx-auto px-6 sm:px-10 py-20 sm:py-28">
           <MotionDiv variants={fadeUp}>
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--accent)]/20 bg-[var(--accent-subtle)] px-3 py-1 text-xs font-semibold text-[var(--accent)]">
-              {outputTab.charAt(0).toUpperCase() + outputTab.slice(1)}
-            </span>
-            <h2 className="mt-4 text-3xl font-bold sm:text-4xl">Outputs</h2>
-            <p className="mt-3 text-[var(--muted)]">Browse course projects by period.</p>
+            <span className="chip text-xs">{outputTab.charAt(0).toUpperCase() + outputTab.slice(1)}</span>
+            <h2 className="huge-text mt-4 text-4xl sm:text-5xl">Outputs</h2>
+            <p className="mt-4 text-[var(--muted)]">Browse course projects by period.</p>
           </MotionDiv>
 
           <MotionDiv variants={fadeUp} className="mt-8 flex flex-wrap gap-2">
@@ -354,10 +281,10 @@ function HomePage() {
                 key={tab}
                 type="button"
                 onClick={() => setOutputTab(tab)}
-                className={`rounded-xl px-4 py-2 text-sm font-semibold transition ${
+                className={`rounded-full px-5 py-2 text-sm font-semibold transition ${
                   outputTab === tab
                     ? 'bg-[var(--accent)] text-white'
-                    : 'border border-[var(--card-border)] bg-[var(--card-bg)] text-[var(--muted)] hover:text-[var(--page-text)]'
+                    : 'border border-[var(--card-border)] bg-card text-[var(--muted)] hover:text-[var(--page-text)]'
                 }`}
               >
                 {tab.charAt(0).toUpperCase() + tab.slice(1)}
@@ -366,11 +293,11 @@ function HomePage() {
           </MotionDiv>
 
           <MotionDiv variants={stagger} className="mt-8">
-            {activeOutputs.length > 0 ? (
+            {outputMap[outputTab]?.length > 0 ? (
               <div className="space-y-4">
-                {activeOutputs.map((item) => (
-                  <MotionArticle key={item.id} variants={fadeUp} className="rounded-xl border border-[var(--card-border)] bg-[var(--card-bg)] p-5">
-                    <p className="text-xs font-semibold uppercase tracking-wider text-[var(--accent)]">
+                {outputMap[outputTab].map((item) => (
+                  <MotionArticle key={item.id} variants={fadeUp} className="rounded-2xl border border-[var(--card-border)] bg-card p-5 sm:p-6">
+                    <p className="text-xs font-semibold uppercase tracking-widest text-[var(--accent)]">
                       {[item.exerciseLabel, item.exerciseCode].filter(Boolean).join(' ')}
                     </p>
                     <h3 className="mt-1 text-lg font-semibold">{item.title}</h3>
@@ -378,10 +305,10 @@ function HomePage() {
                 ))}
               </div>
             ) : (
-              <MotionArticle variants={fadeUp} className="rounded-xl border border-[var(--card-border)] bg-[var(--card-bg)] p-10 text-center">
-                <p className="font-heading text-lg font-semibold text-[var(--accent)]">{future?.heading ?? 'Period'}</p>
-                <p className="mt-2 text-2xl font-bold">{future?.status ?? 'Coming Soon'}</p>
-                <p className="mt-2 text-sm text-[var(--muted)]">{future?.summary ?? 'No projects published yet.'}</p>
+              <MotionArticle variants={fadeUp} className="rounded-2xl border border-[var(--card-border)] bg-card p-10 text-center">
+                <p className="huge-text text-2xl text-[var(--accent)]">{outputTab === 'midterm' ? 'Midterm' : outputTab === 'finals' ? 'Finals' : 'Prelim'}</p>
+                <p className="mt-2 text-xl font-semibold">No Outputs Yet</p>
+                <p className="mt-2 text-sm text-[var(--muted)]">Projects will appear here once published.</p>
               </MotionArticle>
             )}
           </MotionDiv>
@@ -394,51 +321,49 @@ function HomePage() {
         variants={fadeUp}
         initial="hidden"
         animate="show"
-        className="mx-auto max-w-3xl px-6 py-20 sm:py-28"
+        className="bg-section-b border-t border-[var(--card-border)] transition-colors"
       >
-        <MotionDiv variants={fadeUp} className="text-center">
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--accent)]/20 bg-[var(--accent-subtle)] px-3 py-1 text-xs font-semibold text-[var(--accent)]">
-            Contact
-          </span>
-          <h2 className="mt-4 text-3xl font-bold sm:text-4xl">Get in Touch</h2>
-          <p className="mt-3 text-[var(--muted)]">Have a question? Feel free to reach out.</p>
-        </MotionDiv>
+        <div className="max-w-3xl mx-auto px-6 sm:px-10 py-20 sm:py-28">
+          <MotionDiv variants={fadeUp} className="text-center">
+            <span className="chip text-xs">Contact</span>
+            <h2 className="huge-text mt-4 text-4xl sm:text-5xl">Get in Touch</h2>
+            <p className="mt-4 text-[var(--muted)]">Have a question? Reach out.</p>
+          </MotionDiv>
 
-        <MotionDiv variants={fadeUp} className="mt-10 rounded-xl border border-[var(--card-border)] bg-[var(--card-bg)] p-6 sm:p-8">
-          <form onSubmit={handleContactSubmit} noValidate aria-label="Contact form" className="space-y-5">
-            <div className="grid gap-5 sm:grid-cols-2">
-              {['name', 'email'].map((field) => (
-                <div key={field}>
-                  <label htmlFor={field} className="mb-1.5 block text-sm font-medium capitalize">{field}</label>
-                  <input id={field} name={field} type={field === 'email' ? 'email' : 'text'} value={contactForm[field]}
-                    onChange={(e) => setContactForm({ ...contactForm, [field]: e.target.value })}
-                    className="w-full rounded-xl border border-[var(--card-border)] bg-[var(--page-bg)] px-4 py-2.5 text-sm outline-none transition focus:border-[var(--accent)]"
-                    aria-invalid={Boolean(contactErrors[field])} />
-                  {contactErrors[field] && <p className="mt-1 text-xs text-rose-500">{contactErrors[field]}</p>}
-                </div>
-              ))}
+          <MotionDiv variants={fadeUp} className="mt-12 rounded-2xl border border-[var(--card-border)] bg-card p-6 sm:p-8">
+            <form onSubmit={handleContactSubmit} noValidate aria-label="Contact form" className="space-y-5">
+              <div className="grid gap-5 sm:grid-cols-2">
+                {['name', 'email'].map((field) => (
+                  <div key={field}>
+                    <label htmlFor={field} className="mb-1.5 block text-sm font-medium capitalize">{field}</label>
+                    <input id={field} name={field} type={field === 'email' ? 'email' : 'text'} value={contactForm[field]}
+                      onChange={(e) => setContactForm({ ...contactForm, [field]: e.target.value })}
+                      className="w-full rounded-xl border border-[var(--card-border)] bg-[var(--page-bg)] px-4 py-2.5 text-sm outline-none transition focus:border-[var(--accent)]"
+                      aria-invalid={Boolean(contactErrors[field])} />
+                    {contactErrors[field] && <p className="mt-1 text-xs text-rose-500">{contactErrors[field]}</p>}
+                  </div>
+                ))}
+              </div>
+              <div>
+                <label htmlFor="message" className="mb-1.5 block text-sm font-medium">Message</label>
+                <textarea id="message" name="message" rows={4} value={contactForm.message}
+                  onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
+                  className="w-full rounded-xl border border-[var(--card-border)] bg-[var(--page-bg)] px-4 py-2.5 text-sm outline-none transition focus:border-[var(--accent)]"
+                  aria-invalid={Boolean(contactErrors.message)} />
+                {contactErrors.message && <p className="mt-1 text-xs text-rose-500">{contactErrors.message}</p>}
+              </div>
+              <div className="flex items-center gap-4">
+                <button type="submit" className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-6 py-2.5 text-sm font-semibold text-white transition hover:brightness-110">
+                  <Send className="h-3.5 w-3.5" /> Send
+                </button>
+                {contactSent && <p className="text-sm text-emerald-600 dark:text-emerald-400">Ready for backend.</p>}
+              </div>
+            </form>
+            <div className="mt-6 pt-6 border-t border-[var(--card-border)]">
+              <a href={`mailto:${identity.email}`} className="text-sm text-[var(--accent)] hover:underline">{identity.email}</a>
             </div>
-            <div>
-              <label htmlFor="message" className="mb-1.5 block text-sm font-medium">Message</label>
-              <textarea id="message" name="message" rows={4} value={contactForm.message}
-                onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
-                className="w-full rounded-xl border border-[var(--card-border)] bg-[var(--page-bg)] px-4 py-2.5 text-sm outline-none transition focus:border-[var(--accent)]"
-                aria-invalid={Boolean(contactErrors.message)} />
-              {contactErrors.message && <p className="mt-1 text-xs text-rose-500">{contactErrors.message}</p>}
-            </div>
-            <div className="flex items-center gap-4">
-              <button type="submit" className="inline-flex items-center gap-2 rounded-xl bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white transition hover:brightness-110">
-                <Send className="h-3.5 w-3.5" /> Send
-              </button>
-              {contactSent && <p className="text-sm text-emerald-600 dark:text-emerald-400">Ready for backend integration.</p>}
-            </div>
-          </form>
-          <div className="mt-6 pt-6 border-t border-[var(--card-border)]">
-            <a href={`mailto:${identity.email}`} className="inline-flex items-center gap-2 text-sm text-[var(--accent)] hover:underline">
-              <Mail className="h-4 w-4" /> {identity.email}
-            </a>
-          </div>
-        </MotionDiv>
+          </MotionDiv>
+        </div>
       </MotionSection>
     </>
   )

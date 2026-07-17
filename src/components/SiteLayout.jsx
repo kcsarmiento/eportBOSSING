@@ -14,7 +14,7 @@ const navItems = [
 function SiteLayout() {
   const [darkMode, setDarkMode] = useState(() => {
     const saved = localStorage.getItem('theme')
-    return saved ? saved === 'dark' : true
+    return saved ? saved === 'dark' : false
   })
   const [activeSection, setActiveSection] = useState('')
   const [showBackToTop, setShowBackToTop] = useState(false)
@@ -48,29 +48,29 @@ function SiteLayout() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-ambient text-[var(--page-text)] antialiased flex flex-col">
+    <div className="min-h-screen bg-ambient text-[var(--page-text)] antialiased flex flex-col transition-colors">
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-xl focus:bg-[var(--accent)] focus:px-4 focus:py-2.5 focus:text-[#0c0a09] focus:text-sm focus:font-semibold"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-[var(--accent)] focus:px-4 focus:py-2.5 focus:text-white focus:text-sm focus:font-semibold"
       >
         Skip to main content
       </a>
 
-      <header className="fixed top-4 right-4 left-4 z-40 mx-auto max-w-5xl rounded-2xl border border-[var(--header-border)] bg-[var(--header-bg)] backdrop-blur-2xl">
-        <nav className="flex items-center justify-between px-4 py-2 sm:px-5" aria-label="Main navigation">
-          <a href="#home" className="font-heading text-base font-bold gradient-text sm:text-lg">
+      <header className="fixed top-0 right-0 left-0 z-40 border-b border-[var(--header-border)] bg-[var(--header-bg)] backdrop-blur-xl transition-colors">
+        <nav className="mx-auto flex max-w-5xl items-center justify-between px-5 py-3.5" aria-label="Main navigation">
+          <a href="#home" className="font-heading text-lg font-bold gradient-text">
             JKV
           </a>
 
-          <div className="hidden items-center gap-0.5 md:flex">
+          <div className="hidden items-center gap-1 md:flex">
             {navItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                className={`rounded-xl px-3 py-1.5 text-sm font-medium transition ${
+                className={`rounded-lg px-3.5 py-1.5 text-sm font-medium transition ${
                   activeSection === item.href.slice(1)
                     ? 'bg-[var(--accent-subtle)] text-[var(--accent)]'
-                    : 'text-[var(--page-text)]/50 hover:text-[var(--page-text)]'
+                    : 'text-[var(--muted)] hover:text-[var(--page-text)]'
                 }`}
               >
                 {item.label}
@@ -81,7 +81,7 @@ function SiteLayout() {
           <button
             type="button"
             onClick={() => setDarkMode((prev) => !prev)}
-            className="rounded-xl border border-[var(--card-border)] p-2 text-[var(--page-text)]/50 transition hover:text-[var(--page-text)]"
+            className="rounded-lg border border-[var(--card-border)] bg-[var(--card-bg)] p-2 text-[var(--muted)] transition hover:text-[var(--page-text)]"
             aria-label="Toggle dark mode"
           >
             {darkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
@@ -89,12 +89,12 @@ function SiteLayout() {
         </nav>
       </header>
 
-      <main id="main-content" tabIndex={-1} className="flex-1">
+      <main id="main-content" tabIndex={-1} className="flex-1 pt-16">
         <Outlet />
       </main>
 
-      <footer className="border-t border-[var(--card-border)] px-6 py-8 text-center">
-        <p className="text-sm text-[var(--page-text)]/30">&copy; {year} John Klien Villanueva &middot; Jose Rizal University</p>
+      <footer className="border-t border-[var(--card-border)] px-6 py-10 text-center">
+        <p className="text-sm text-[var(--muted)]">&copy; {year} John Klien Villanueva &middot; Jose Rizal University</p>
       </footer>
 
       {showBackToTop && (

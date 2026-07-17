@@ -23,12 +23,12 @@ const identity = {
   name: 'John Klien Villanueva',
   course: 'BSIT 402 — ITC-C508',
   email: 'johnklien.villanueva@my.jru.edu',
-  aboutPreview: '4th year IT student building software solutions and documenting academic progress through this ePortfolio.',
+  aboutPreview: '4th year IT student at Jose Rizal University, focused on software development and web technologies.',
   fullBio: 'I am a 4th year BSIT student at Jose Rizal University with a focus on software development and web technologies. This ePortfolio serves as my workspace and record of learning for ITC-C508 — showcasing projects, reflections, and competencies developed throughout the course.',
 }
 
 const skills = ['Python', 'JavaScript', 'PHP', 'React', 'Laravel', 'Tailwind CSS', 'REST APIs', 'Git']
-const tools = ['VS Code', 'GitHub', 'Figma', 'Postman', 'Jupyter Notebook', 'SQL']
+const tools = ['VS Code', 'GitHub', 'Figma', 'Postman', 'Jupyter Notebook']
 
 const education = [
   { school: 'Jose Rizal University', degree: 'BS Information Technology', level: '4th Year' },
@@ -149,28 +149,30 @@ function HomePage() {
         variants={stagger}
         initial="hidden"
         animate="show"
-        className="mx-auto max-w-5xl px-5 pt-28 pb-16 sm:pt-36 sm:pb-24"
+        className="mx-auto max-w-5xl px-6 pt-28 pb-16 sm:pt-36 sm:pb-24"
       >
-        <MotionDiv variants={fadeUp} className="max-w-3xl">
-          <span className="tag text-xs tracking-wider">{identity.course}</span>
-          <h1 className="mt-5 text-[2.5rem] font-extrabold leading-[1.1] tracking-tight sm:text-6xl lg:text-7xl">
+        <MotionDiv variants={fadeUp}>
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--accent)]/20 bg-[var(--accent-subtle)] px-3 py-1 text-xs font-semibold text-[var(--accent)]">
+            {identity.course}
+          </span>
+          <h1 className="mt-5 text-[2.5rem] font-extrabold leading-[1.08] tracking-tight sm:text-6xl lg:text-7xl">
             {identity.name}
           </h1>
-          <p className="mt-4 max-w-xl text-lg leading-relaxed text-[var(--page-text)]/60">
+          <p className="mt-4 max-w-xl text-lg leading-relaxed text-[var(--muted)]">
             {identity.aboutPreview}
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <button
               type="button"
               onClick={() => scrollTo('course-expectations')}
-              className="inline-flex items-center gap-2 rounded-xl bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-[#0c0a09] transition hover:opacity-90"
+              className="inline-flex items-center gap-2 rounded-xl bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white transition hover:brightness-110"
             >
               Course Expectations <ArrowRight className="h-3.5 w-3.5" />
             </button>
             <button
               type="button"
               onClick={() => scrollTo('outputs')}
-              className="inline-flex items-center gap-2 rounded-xl border border-[var(--card-border)] bg-card px-5 py-2.5 text-sm font-semibold transition hover:text-[var(--accent)]"
+              className="inline-flex items-center gap-2 rounded-xl border border-[var(--card-border)] bg-[var(--card-bg)] px-5 py-2.5 text-sm font-semibold transition hover:text-[var(--accent)]"
             >
               View Outputs <ExternalLink className="h-3.5 w-3.5" />
             </button>
@@ -179,7 +181,7 @@ function HomePage() {
 
         <MotionDiv variants={fadeUp} className="mt-10 flex flex-wrap gap-2">
           {skills.slice(0, 6).map((s) => (
-            <span key={s} className="rounded-xl border border-[var(--card-border)] bg-card px-3 py-1.5 text-xs text-[var(--page-text)]/50">
+            <span key={s} className="rounded-lg border border-[var(--card-border)] bg-[var(--card-bg)] px-2.5 py-1 text-xs text-[var(--muted)]">
               {s}
             </span>
           ))}
@@ -192,31 +194,51 @@ function HomePage() {
         variants={stagger}
         initial="hidden"
         animate="show"
-        className="mx-auto max-w-5xl px-5 py-20 sm:py-28"
+        className="bg-section-alt border-y border-[var(--card-border)] transition-colors"
       >
-        <MotionDiv variants={fadeUp}>
-          <span className="tag text-xs">ITC-C508</span>
-          <h2 className="mt-4 text-3xl font-bold sm:text-4xl">Course Expectations</h2>
-          <p className="mt-3 max-w-2xl leading-relaxed text-[var(--page-text)]/50">
-            Responses to the required readings on deep learning and NLP for ITC-C508.
-          </p>
-        </MotionDiv>
+        <div className="mx-auto max-w-5xl px-6 py-20 sm:py-28">
+          <MotionDiv variants={fadeUp}>
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--accent)]/20 bg-[var(--accent-subtle)] px-3 py-1 text-xs font-semibold text-[var(--accent)]">
+              ITC-C508
+            </span>
+            <h2 className="mt-4 text-3xl font-bold sm:text-4xl">Course Expectations</h2>
+            <p className="mt-3 max-w-2xl leading-relaxed text-[var(--muted)]">
+              Responses to the required readings on deep learning and NLP for ITC-C508.
+            </p>
+          </MotionDiv>
 
-        <div className="mt-10 space-y-6">
-          {courseQA.map((item) => (
-            <MotionDiv key={item.id} variants={fadeUp} className="overflow-hidden rounded-xl border border-[var(--card-border)] bg-card card-accent-top">
-              <div className="p-5 sm:p-6">
-                <p className="font-heading text-xs font-semibold uppercase tracking-wider text-[var(--accent)]">
+          <div className="mt-10 space-y-5">
+            {courseQA.map((item) => (
+              <MotionDiv key={item.id} variants={fadeUp} className="rounded-xl border border-[var(--card-border)] bg-[var(--card-bg)] p-6 sm:p-7">
+                <p className="text-xs font-semibold uppercase tracking-wider text-[var(--accent)]">
                   {item.label}
                 </p>
-                <p className="mt-1.5 font-heading text-lg font-semibold">{item.question}</p>
-                <div className="mt-4 border-t border-[var(--card-border)] pt-4 text-sm leading-relaxed text-[var(--page-text)]/65">
+                <p className="mt-1.5 text-lg font-semibold sm:text-xl">{item.question}</p>
+                <div className="mt-4 border-t border-[var(--card-border)] pt-4 text-sm leading-relaxed text-[var(--muted)]">
                   {item.answer}
                 </div>
-              </div>
-            </MotionDiv>
-          ))}
+              </MotionDiv>
+            ))}
+          </div>
         </div>
+      </MotionSection>
+
+      {/* ─── Latest Projects ─── */}
+      <MotionSection
+        variants={stagger}
+        initial="hidden"
+        animate="show"
+        className="mx-auto max-w-5xl px-6 py-20 sm:py-28"
+      >
+        <MotionDiv variants={fadeUp}>
+          <h2 className="text-3xl font-bold sm:text-4xl">Latest Projects</h2>
+          <p className="mt-3 text-[var(--muted)]">Recent course outputs will appear here.</p>
+        </MotionDiv>
+
+        <MotionDiv variants={fadeUp} className="mt-10 rounded-xl border border-[var(--card-border)] bg-[var(--card-bg)] p-10 text-center">
+          <p className="font-heading text-xl font-semibold text-[var(--accent)]">No projects yet</p>
+          <p className="mt-2 text-sm text-[var(--muted)]">Add your outputs to get started.</p>
+        </MotionDiv>
       </MotionSection>
 
       {/* ─── About ─── */}
@@ -225,39 +247,43 @@ function HomePage() {
         variants={stagger}
         initial="hidden"
         animate="show"
-        className="mx-auto max-w-5xl px-5 py-20 sm:py-28"
+        className="bg-section-alt border-y border-[var(--card-border)] transition-colors"
       >
-        <MotionDiv variants={fadeUp}>
-          <span className="tag text-xs">About</span>
-          <h2 className="mt-4 text-3xl font-bold sm:text-4xl">Background</h2>
-          <p className="mt-4 max-w-2xl leading-relaxed text-[var(--page-text)]/65">{identity.fullBio}</p>
-        </MotionDiv>
+        <div className="mx-auto max-w-5xl px-6 py-20 sm:py-28">
+          <MotionDiv variants={fadeUp}>
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--accent)]/20 bg-[var(--accent-subtle)] px-3 py-1 text-xs font-semibold text-[var(--accent)]">
+              About
+            </span>
+            <h2 className="mt-4 text-3xl font-bold sm:text-4xl">Background &amp; Skills</h2>
+            <p className="mt-4 max-w-2xl leading-relaxed text-[var(--muted)]">{identity.fullBio}</p>
+          </MotionDiv>
 
-        <div className="mt-10 grid gap-6 sm:grid-cols-2">
-          <MotionDiv variants={fadeUp} className="rounded-xl border border-[var(--card-border)] bg-card p-5">
-            <h3 className="flex items-center gap-2 font-heading text-base font-semibold"><Code2 className="h-4 w-4 text-[var(--accent)]" /> Skills</h3>
-            <div className="mt-3 flex flex-wrap gap-1.5">
-              {skills.map((s) => (
-                <span key={s} className="rounded-lg border border-[var(--card-border)] px-2.5 py-1 text-xs text-[var(--page-text)]/60">{s}</span>
-              ))}
-            </div>
-          </MotionDiv>
-          <MotionDiv variants={fadeUp} className="rounded-xl border border-[var(--card-border)] bg-card p-5">
-            <h3 className="flex items-center gap-2 font-heading text-base font-semibold"><Wrench className="h-4 w-4 text-[var(--accent)]" /> Tools</h3>
-            <div className="mt-3 flex flex-wrap gap-1.5">
-              {tools.map((s) => (
-                <span key={s} className="rounded-lg border border-[var(--card-border)] px-2.5 py-1 text-xs text-[var(--page-text)]/60">{s}</span>
-              ))}
-            </div>
-          </MotionDiv>
-          <MotionDiv variants={fadeUp} className="sm:col-span-2 rounded-xl border border-[var(--card-border)] bg-card p-5">
-            <h3 className="flex items-center gap-2 font-heading text-base font-semibold"><GraduationCap className="h-4 w-4 text-[var(--accent)]" /> Education</h3>
-            <div className="mt-2">
-              {education.map((e) => (
-                <p key={e.school} className="text-sm"><span className="font-medium">{e.school}</span> &middot; {e.degree} &middot; {e.level}</p>
-              ))}
-            </div>
-          </MotionDiv>
+          <div className="mt-10 grid gap-5 sm:grid-cols-2">
+            <MotionDiv variants={fadeUp} className="rounded-xl border border-[var(--card-border)] bg-[var(--card-bg)] p-5">
+              <h3 className="flex items-center gap-2 font-heading text-base font-semibold"><Code2 className="h-4 w-4 text-[var(--accent)]" /> Skills</h3>
+              <div className="mt-3 flex flex-wrap gap-1.5">
+                {skills.map((s) => (
+                  <span key={s} className="rounded-lg border border-[var(--card-border)] px-2.5 py-1 text-xs text-[var(--muted)]">{s}</span>
+                ))}
+              </div>
+            </MotionDiv>
+            <MotionDiv variants={fadeUp} className="rounded-xl border border-[var(--card-border)] bg-[var(--card-bg)] p-5">
+              <h3 className="flex items-center gap-2 font-heading text-base font-semibold"><Wrench className="h-4 w-4 text-[var(--accent)]" /> Tools</h3>
+              <div className="mt-3 flex flex-wrap gap-1.5">
+                {tools.map((s) => (
+                  <span key={s} className="rounded-lg border border-[var(--card-border)] px-2.5 py-1 text-xs text-[var(--muted)]">{s}</span>
+                ))}
+              </div>
+            </MotionDiv>
+            <MotionDiv variants={fadeUp} className="sm:col-span-2 rounded-xl border border-[var(--card-border)] bg-[var(--card-bg)] p-5">
+              <h3 className="flex items-center gap-2 font-heading text-base font-semibold"><GraduationCap className="h-4 w-4 text-[var(--accent)]" /> Education</h3>
+              <div className="mt-2 text-sm">
+                {education.map((e) => (
+                  <p key={e.school}><span className="font-medium">{e.school}</span> &middot; {e.degree} &middot; {e.level}</p>
+                ))}
+              </div>
+            </MotionDiv>
+          </div>
         </div>
       </MotionSection>
 
@@ -267,35 +293,37 @@ function HomePage() {
         variants={stagger}
         initial="hidden"
         animate="show"
-        className="mx-auto max-w-5xl px-5 py-20 sm:py-28"
+        className="mx-auto max-w-5xl px-6 py-20 sm:py-28"
       >
         <MotionDiv variants={fadeUp}>
-          <span className="tag text-xs">ITC-C508</span>
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--accent)]/20 bg-[var(--accent-subtle)] px-3 py-1 text-xs font-semibold text-[var(--accent)]">
+            ITC-C508
+          </span>
           <h2 className="mt-4 text-3xl font-bold sm:text-4xl">Course Records</h2>
-          <p className="mt-3 max-w-2xl leading-relaxed text-[var(--page-text)]/50">
+          <p className="mt-3 max-w-2xl text-[var(--muted)]">
             Academic workspace for ITC-C508 — E-Business: Higher Education and Intelligence Applications.
           </p>
         </MotionDiv>
 
         <MotionDiv variants={stagger} className="mt-10 space-y-4">
           {c508Records.map((record) => (
-            <MotionArticle key={record.id} variants={fadeUp} className="rounded-xl border border-[var(--card-border)] bg-card p-5 transition hover:border-[var(--accent)]/30">
+            <MotionArticle key={record.id} variants={fadeUp} className="rounded-xl border border-[var(--card-border)] bg-[var(--card-bg)] p-5 transition hover-card">
               <div className="flex items-start justify-between gap-4">
                 <div className="space-y-1.5">
-                  <div className="flex items-center gap-2">
-                    <span className="font-heading text-xs font-semibold uppercase tracking-wider text-[var(--accent)]">{record.type}</span>
-                    <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${
+                  <div className="flex items-center gap-2.5">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-[var(--accent)]">{record.type}</span>
+                    <span className={`badge ${
                       record.status === 'Submitted'
-                        ? 'bg-emerald-500/10 text-emerald-400'
+                        ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
                         : 'bg-[var(--accent-subtle)] text-[var(--accent)]'
                     }`}>
-                      {record.status === 'Submitted' && <CheckCircle className="mr-0.5 inline h-2.5 w-2.5" />}
+                      {record.status === 'Submitted' && <CheckCircle className="h-2.5 w-2.5" />}
                       {record.status}
                     </span>
                   </div>
-                  <h3 className="font-heading text-lg font-semibold">{record.title}</h3>
-                  <p className="text-sm leading-relaxed text-[var(--page-text)]/60">{record.description}</p>
-                  <p className="text-xs text-[var(--page-text)]/30">{record.date}</p>
+                  <h3 className="text-lg font-semibold">{record.title}</h3>
+                  <p className="text-sm text-[var(--muted)]">{record.description}</p>
+                  <p className="text-xs text-[var(--muted)]/60">{record.date}</p>
                 </div>
               </div>
             </MotionArticle>
@@ -309,53 +337,55 @@ function HomePage() {
         variants={stagger}
         initial="hidden"
         animate="show"
-        className="mx-auto max-w-5xl px-5 py-20 sm:py-28"
+        className="bg-section-alt border-y border-[var(--card-border)] transition-colors"
       >
-        <MotionDiv variants={fadeUp}>
-          <span className="tag text-xs">{outputTab.charAt(0).toUpperCase() + outputTab.slice(1)}</span>
-          <h2 className="mt-4 text-3xl font-bold sm:text-4xl">Outputs</h2>
-          <p className="mt-3 max-w-2xl leading-relaxed text-[var(--page-text)]/50">
-            Browse course projects by period.
-          </p>
-        </MotionDiv>
+        <div className="mx-auto max-w-5xl px-6 py-20 sm:py-28">
+          <MotionDiv variants={fadeUp}>
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--accent)]/20 bg-[var(--accent-subtle)] px-3 py-1 text-xs font-semibold text-[var(--accent)]">
+              {outputTab.charAt(0).toUpperCase() + outputTab.slice(1)}
+            </span>
+            <h2 className="mt-4 text-3xl font-bold sm:text-4xl">Outputs</h2>
+            <p className="mt-3 text-[var(--muted)]">Browse course projects by period.</p>
+          </MotionDiv>
 
-        <MotionDiv variants={fadeUp} className="mt-8 flex flex-wrap gap-2">
-          {periodTabs.map((tab) => (
-            <button
-              key={tab}
-              type="button"
-              onClick={() => setOutputTab(tab)}
-              className={`rounded-xl px-4 py-2 text-sm font-semibold transition ${
-                outputTab === tab
-                  ? 'bg-[var(--accent)] text-[#0c0a09]'
-                  : 'border border-[var(--card-border)] bg-card text-[var(--page-text)]/50 hover:text-[var(--page-text)]'
-              }`}
-            >
-              {tab.charAt(0).toUpperCase() + tab.slice(1)}
-            </button>
-          ))}
-        </MotionDiv>
+          <MotionDiv variants={fadeUp} className="mt-8 flex flex-wrap gap-2">
+            {periodTabs.map((tab) => (
+              <button
+                key={tab}
+                type="button"
+                onClick={() => setOutputTab(tab)}
+                className={`rounded-xl px-4 py-2 text-sm font-semibold transition ${
+                  outputTab === tab
+                    ? 'bg-[var(--accent)] text-white'
+                    : 'border border-[var(--card-border)] bg-[var(--card-bg)] text-[var(--muted)] hover:text-[var(--page-text)]'
+                }`}
+              >
+                {tab.charAt(0).toUpperCase() + tab.slice(1)}
+              </button>
+            ))}
+          </MotionDiv>
 
-        <MotionDiv variants={stagger} className="mt-8">
-          {activeOutputs.length > 0 ? (
-            <div className="space-y-4">
-              {activeOutputs.map((item) => (
-                <MotionArticle key={item.id} variants={fadeUp} className="rounded-xl border border-[var(--card-border)] bg-card p-5">
-                  <p className="font-heading text-xs font-semibold uppercase tracking-wider text-[var(--accent)]">
-                    {[item.exerciseLabel, item.exerciseCode].filter(Boolean).join(' ')}
-                  </p>
-                  <h3 className="mt-1 font-heading text-lg font-semibold">{item.title}</h3>
-                </MotionArticle>
-              ))}
-            </div>
-          ) : (
-            <MotionArticle variants={fadeUp} className="rounded-xl border border-[var(--card-border)] bg-card p-8 text-center">
-              <p className="font-heading text-lg font-semibold text-[var(--accent)]">{future?.heading ?? 'Period'}</p>
-              <p className="mt-2 text-2xl font-bold">{future?.status ?? 'Coming Soon'}</p>
-              <p className="mt-2 text-sm text-[var(--page-text)]/50">{future?.summary ?? 'No projects published yet.'}</p>
-            </MotionArticle>
-          )}
-        </MotionDiv>
+          <MotionDiv variants={stagger} className="mt-8">
+            {activeOutputs.length > 0 ? (
+              <div className="space-y-4">
+                {activeOutputs.map((item) => (
+                  <MotionArticle key={item.id} variants={fadeUp} className="rounded-xl border border-[var(--card-border)] bg-[var(--card-bg)] p-5">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-[var(--accent)]">
+                      {[item.exerciseLabel, item.exerciseCode].filter(Boolean).join(' ')}
+                    </p>
+                    <h3 className="mt-1 text-lg font-semibold">{item.title}</h3>
+                  </MotionArticle>
+                ))}
+              </div>
+            ) : (
+              <MotionArticle variants={fadeUp} className="rounded-xl border border-[var(--card-border)] bg-[var(--card-bg)] p-10 text-center">
+                <p className="font-heading text-lg font-semibold text-[var(--accent)]">{future?.heading ?? 'Period'}</p>
+                <p className="mt-2 text-2xl font-bold">{future?.status ?? 'Coming Soon'}</p>
+                <p className="mt-2 text-sm text-[var(--muted)]">{future?.summary ?? 'No projects published yet.'}</p>
+              </MotionArticle>
+            )}
+          </MotionDiv>
+        </div>
       </MotionSection>
 
       {/* ─── Contact ─── */}
@@ -364,15 +394,17 @@ function HomePage() {
         variants={fadeUp}
         initial="hidden"
         animate="show"
-        className="mx-auto max-w-3xl px-5 py-20 sm:py-28"
+        className="mx-auto max-w-3xl px-6 py-20 sm:py-28"
       >
         <MotionDiv variants={fadeUp} className="text-center">
-          <span className="tag text-xs">Contact</span>
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--accent)]/20 bg-[var(--accent-subtle)] px-3 py-1 text-xs font-semibold text-[var(--accent)]">
+            Contact
+          </span>
           <h2 className="mt-4 text-3xl font-bold sm:text-4xl">Get in Touch</h2>
-          <p className="mt-3 text-[var(--page-text)]/50">Have a question? Feel free to reach out.</p>
+          <p className="mt-3 text-[var(--muted)]">Have a question? Feel free to reach out.</p>
         </MotionDiv>
 
-        <MotionDiv variants={fadeUp} className="mt-10 rounded-xl border border-[var(--card-border)] bg-card p-6 sm:p-8">
+        <MotionDiv variants={fadeUp} className="mt-10 rounded-xl border border-[var(--card-border)] bg-[var(--card-bg)] p-6 sm:p-8">
           <form onSubmit={handleContactSubmit} noValidate aria-label="Contact form" className="space-y-5">
             <div className="grid gap-5 sm:grid-cols-2">
               {['name', 'email'].map((field) => (
@@ -382,7 +414,7 @@ function HomePage() {
                     onChange={(e) => setContactForm({ ...contactForm, [field]: e.target.value })}
                     className="w-full rounded-xl border border-[var(--card-border)] bg-[var(--page-bg)] px-4 py-2.5 text-sm outline-none transition focus:border-[var(--accent)]"
                     aria-invalid={Boolean(contactErrors[field])} />
-                  {contactErrors[field] && <p className="mt-1 text-xs text-rose-400">{contactErrors[field]}</p>}
+                  {contactErrors[field] && <p className="mt-1 text-xs text-rose-500">{contactErrors[field]}</p>}
                 </div>
               ))}
             </div>
@@ -392,13 +424,13 @@ function HomePage() {
                 onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
                 className="w-full rounded-xl border border-[var(--card-border)] bg-[var(--page-bg)] px-4 py-2.5 text-sm outline-none transition focus:border-[var(--accent)]"
                 aria-invalid={Boolean(contactErrors.message)} />
-              {contactErrors.message && <p className="mt-1 text-xs text-rose-400">{contactErrors.message}</p>}
+              {contactErrors.message && <p className="mt-1 text-xs text-rose-500">{contactErrors.message}</p>}
             </div>
             <div className="flex items-center gap-4">
-              <button type="submit" className="inline-flex items-center gap-2 rounded-xl bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-[#0c0a09] transition hover:opacity-90">
+              <button type="submit" className="inline-flex items-center gap-2 rounded-xl bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white transition hover:brightness-110">
                 <Send className="h-3.5 w-3.5" /> Send
               </button>
-              {contactSent && <p className="text-sm text-emerald-400/70">Ready for backend integration.</p>}
+              {contactSent && <p className="text-sm text-emerald-600 dark:text-emerald-400">Ready for backend integration.</p>}
             </div>
           </form>
           <div className="mt-6 pt-6 border-t border-[var(--card-border)]">

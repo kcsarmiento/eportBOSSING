@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=DM+Sans:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,34 +6,52 @@
 
 @layer base {
   :root {
-    --page-bg: #0c0a09;
-    --page-text: #fafaf9;
-    --card-bg: rgba(28, 25, 23, 0.75);
+    --page-bg: #f8fafc;
+    --page-text: #0f172a;
+    --card-bg: #ffffff;
+    --card-border: rgba(0, 0, 0, 0.06);
+    --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
+    --header-bg: rgba(255, 255, 255, 0.85);
+    --header-border: rgba(0, 0, 0, 0.06);
+    --accent: #6366f1;
+    --accent-subtle: rgba(99, 102, 241, 0.08);
+    --accent-glow: rgba(99, 102, 241, 0.12);
+    --muted: #64748b;
+    --section-alt: #f1f5f9;
+  }
+
+  html.dark {
+    --page-bg: #0b1120;
+    --page-text: #e2e8f0;
+    --card-bg: rgba(30, 41, 59, 0.7);
     --card-border: rgba(255, 255, 255, 0.06);
-    --header-bg: rgba(12, 10, 9, 0.9);
+    --card-shadow: none;
+    --header-bg: rgba(11, 17, 32, 0.9);
     --header-border: rgba(255, 255, 255, 0.06);
-    --accent: #fb7185;
-    --accent-subtle: rgba(251, 113, 133, 0.1);
-    --accent-glow: rgba(251, 113, 133, 0.15);
-    --accent-gradient: linear-gradient(135deg, #fb7185, #f97316);
+    --accent: #818cf8;
+    --accent-subtle: rgba(129, 140, 248, 0.1);
+    --accent-glow: rgba(129, 140, 248, 0.15);
+    --muted: #94a3b8;
+    --section-alt: rgba(30, 41, 59, 0.3);
   }
 
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 4.5rem;
+    scroll-padding-top: 5rem;
   }
 
   body {
     margin: 0;
     background: var(--page-bg);
     color: var(--page-text);
-    font-family: 'DM Sans', system-ui, sans-serif;
+    font-family: 'Inter', system-ui, sans-serif;
     font-size: 17px;
     line-height: 1.7;
+    transition: background-color 0.3s, color 0.3s;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-family: 'Sora', system-ui, sans-serif;
     font-weight: 700;
     letter-spacing: -0.02em;
   }
@@ -46,44 +64,42 @@
 
   ::selection {
     background: var(--accent);
-    color: #0c0a09;
+    color: #fff;
   }
 }
 
 @layer utilities {
   .bg-ambient { background-color: var(--page-bg); }
+  .bg-section-alt { background-color: var(--section-alt); }
 
   .bg-card {
     background-color: var(--card-bg);
     border-color: var(--card-border);
+    box-shadow: var(--card-shadow);
   }
 
   .text-accent { color: var(--accent); }
   .border-accent { border-color: var(--accent); }
   .bg-accent-subtle { background-color: var(--accent-subtle); }
-  .glow-accent { box-shadow: 0 0 24px var(--accent-glow); }
+  .text-muted { color: var(--muted); }
 
   .gradient-text {
-    background: var(--accent-gradient);
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  .tag {
-    display: inline-block;
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
     border-radius: 999px;
-    padding: 0.25rem 0.75rem;
-    font-size: 0.8125rem;
-    font-weight: 500;
-    background: var(--accent-subtle);
-    color: var(--accent);
-    border: 1px solid var(--card-border);
-  }
-
-  .card-accent-top {
-    border-top: 2px solid var(--accent);
-    border-radius: 0.75rem;
+    padding: 0.2rem 0.65rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 
   .hover-card {
@@ -91,6 +107,7 @@
   }
   .hover-card:hover {
     transform: translateY(-2px);
+    box-shadow: 0 8px 25px -8px var(--accent-glow);
   }
 
   .animate-in {

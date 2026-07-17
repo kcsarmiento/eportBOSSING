@@ -132,23 +132,31 @@ function HomePage() {
         animate="show"
         className="min-h-screen flex items-center px-6 sm:px-10"
       >
-        <div className="w-full max-w-6xl mx-auto">
-          <MotionDiv variants={fadeUp} className="max-w-4xl">
-            <span className="chip text-xs tracking-widest uppercase">{identity.course}</span>
-            <h1 className="huge-text mt-6 text-[clamp(2.8rem,12vw,7rem)] leading-[0.9]">
-              {identity.name.split(' ')[0]}<br />
-              {identity.name.split(' ').slice(1).join(' ')}
-            </h1>
-          </MotionDiv>
+        <div className="w-full max-w-6xl mx-auto grid gap-10 lg:grid-cols-[1fr,auto] items-center">
+          <div>
+            <MotionDiv variants={fadeUp} className="max-w-4xl">
+              <span className="chip text-xs tracking-widest uppercase">{identity.course}</span>
+              <h1 className="huge-text mt-6 text-[clamp(2.8rem,12vw,7rem)] leading-[0.9]">
+                {identity.name.split(' ')[0]}<br />
+                {identity.name.split(' ').slice(1).join(' ')}
+              </h1>
+            </MotionDiv>
 
-          <MotionDiv variants={fadeUp} className="mt-6 max-w-xl">
-            <p className="text-base sm:text-lg leading-relaxed text-[var(--muted)]">{identity.bio}</p>
-          </MotionDiv>
+            <MotionDiv variants={fadeUp} className="mt-6 max-w-xl">
+              <p className="text-base sm:text-lg leading-relaxed text-[var(--muted)]">{identity.bio}</p>
+            </MotionDiv>
 
-          <MotionDiv variants={fadeUp} className="mt-10 flex flex-wrap gap-2">
-            {skills.map((s) => (
-              <span key={s} className="rounded-full border border-[var(--card-border)] bg-card px-3 py-1 text-xs text-[var(--muted)]">{s}</span>
-            ))}
+            <MotionDiv variants={fadeUp} className="mt-10 flex flex-wrap gap-2">
+              {skills.map((s) => (
+                <span key={s} className="rounded-full border border-[var(--card-border)] bg-card px-3 py-1 text-xs text-[var(--muted)]">{s}</span>
+              ))}
+            </MotionDiv>
+          </div>
+
+          <MotionDiv variants={fadeUp} className="shrink-0">
+            <div className="relative h-48 w-48 sm:h-64 sm:w-64 overflow-hidden rounded-3xl border border-[var(--card-border)] bg-card">
+              <img src="/bossing.png" alt="Profile" className="h-full w-full object-cover" />
+            </div>
           </MotionDiv>
         </div>
       </MotionSection>

@@ -90,6 +90,7 @@ const prelimOutputs = [
     exerciseLabel: 'Hands-on Exercise',
     exerciseCode: 'WW-P1',
     title: 'ePortfolio — Readings and Expectations',
+    author: identity.name,
     date: 'Jul 17th',
     week: 'WEEK 01 · Jul 13–18',
     status: 'Returned',
@@ -111,6 +112,7 @@ const prelimOutputs = [
         longTerm: 'Build polished, accessible web applications that communicate technical work clearly to both technical and non-technical audiences.',
       },
     },
+    hideResourcePlaceholder: true,
     resources: [],
   },
   {
@@ -118,6 +120,7 @@ const prelimOutputs = [
     exerciseLabel: 'Written Output',
     exerciseCode: 'WW-P2',
     title: 'Introduction to NLP Concepts',
+    author: identity.name,
     date: 'Jul 17th',
     week: 'WEEK 02 · Jul 20–25',
     status: 'Returned',
@@ -148,6 +151,7 @@ const prelimOutputs = [
     exerciseLabel: 'Hands-on Exercise',
     exerciseCode: 'PT-P1',
     title: 'Deep Learning (Neural Networks)',
+    author: identity.name,
     date: 'Jul 23rd',
     week: 'WEEK 03 · Jul 27–Aug 01',
     status: 'Returned',
@@ -178,6 +182,7 @@ const prelimOutputs = [
     exerciseLabel: 'Performance Task',
     exerciseCode: 'PT-P2',
     title: 'Neural Network Training and Testing (Hyperparameters)',
+    author: identity.name,
     date: 'Jul 30th',
     week: 'WEEK 04 · Aug 03–08',
     status: 'Returned',
@@ -216,6 +221,7 @@ const midtermOutputs = [
     exerciseLabel: 'Lab Exercise',
     exerciseCode: 'PT-M1',
     title: 'Building and Evaluating a RAG Chatbot',
+    author: identity.name,
     date: 'Sep 9th',
     week: 'WEEK 08 · Aug 31–Sep 05',
     status: 'Turned in',
@@ -300,7 +306,7 @@ function HomePage() {
 
           <MotionDiv variants={fadeUp} className="shrink-0">
             <div className="relative h-48 w-48 sm:h-64 sm:w-64 overflow-hidden rounded-3xl border border-[var(--card-border)] bg-card">
-              <img src="/bossing.png" alt="Profile" className="h-full w-full object-cover" />
+              <img src="/bossing.png" alt="John Klien Villanueva, BSIT student, standing outdoors" className="h-full w-full object-cover" />
             </div>
           </MotionDiv>
         </div>
@@ -420,6 +426,7 @@ function HomePage() {
                           <span className="chip !text-[10px] !bg-emerald-500/10 !text-emerald-600">{item.status}</span>
                         </div>
                         <h3 className="mt-2 text-xl font-semibold sm:text-2xl">{item.title}</h3>
+                        <p className="mt-2 text-xs font-semibold text-[var(--page-text)]">Author: {item.author}</p>
                         <p className="mt-1 text-xs font-medium uppercase tracking-wider text-[var(--muted)]">{item.week} · {item.date}</p>
                       </div>
                     </div>
@@ -507,7 +514,7 @@ function HomePage() {
                               </a>
                             ))}
                           </div>
-                        ) : !item.previews?.length ? (
+                        ) : !item.previews?.length && !item.hideResourcePlaceholder ? (
                           <p className="text-xs text-[var(--muted)]">PDF and notebook links will be added here.</p>
                         ) : null}
                       </div>

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { CheckCircle, GraduationCap, Send } from 'lucide-react'
+import { BookOpen, ChevronDown, ExternalLink, FileText, Send } from 'lucide-react'
 
 const MotionSection = motion.section
 const MotionDiv = motion.div
@@ -82,19 +82,164 @@ const courseQA = [
   },
 ]
 
-const c508Records = [
+const periodTabs = ['prelim', 'midterm', 'finals']
+
+const prelimOutputs = [
   {
-    id: 'c508-1', title: 'Course Expectations Essay', type: 'Written Output',
-    description: 'Essay on deep learning, NLP, and personal course expectations.', status: 'Submitted',
+    id: 'ww-p1',
+    exerciseLabel: 'Hands-on Exercise',
+    exerciseCode: 'WW-P1',
+    title: 'ePortfolio — Readings and Expectations',
+    date: 'Jul 17th',
+    week: 'WEEK 01 · Jul 13–18',
+    status: 'Returned',
+    description: 'Design and build a personal ePortfolio for ITC-C508 that shows course skills, technical writing, and project work using React, Tailwind CSS, and Framer Motion, deployed on Vercel.',
+    skills: [
+      'React component structure and state management',
+      'Tailwind CSS styling and responsive design',
+      'Framer Motion animations',
+      'Dark mode with system preference detection',
+      'Data-driven content using separate data files',
+      'Web accessibility: headings, alt text, keyboard navigation',
+    ],
+    reflection: {
+      growth: 'I learned to treat an ePortfolio as a real interface rather than a collection of screenshots. I practiced turning course requirements into reusable sections, responsive layouts, accessible controls, and a consistent visual system.',
+      critique: 'My first priority was making the page feel complete, so the content structure and academic evidence could have been planned more deliberately before styling the interface.',
+      alternative: 'I would begin with a content map and an accessibility checklist, then build the smallest working version before adding animation, theme switching, and visual polish.',
+      goals: {
+        shortTerm: 'Review the portfolio with keyboard navigation and tighten the organization of each activity record.',
+        longTerm: 'Build polished, accessible web applications that communicate technical work clearly to both technical and non-technical audiences.',
+      },
+    },
+    resources: [],
   },
   {
-    id: 'c508-2', title: 'ePortfolio Design & Implementation', type: 'Exercise',
-    description: 'ePortfolio design compliant with rubric criteria.', status: 'In Progress',
+    id: 'ww-p2',
+    exerciseLabel: 'Written Output',
+    exerciseCode: 'WW-P2',
+    title: 'Introduction to NLP Concepts',
+    date: 'Jul 17th',
+    week: 'WEEK 02 · Jul 20–25',
+    status: 'Returned',
+    description: 'A written output on natural language processing: what NLP is, its main concepts, and how NLP research is applied in business. It covers text processing, RNNs, Transformers, and sentiment analysis.',
+    skills: [
+      'Explaining NLP concepts in plain language',
+      'Understanding tokenization, embeddings, and language models',
+      'Comparing RNNs and Transformers',
+      'Connecting NLP research to business use cases like chatbots',
+    ],
+    reflection: {
+      growth: 'I developed a clearer mental model of how language moves through an NLP system, from preprocessing and representation to prediction. I can now explain why model architecture affects how context is handled.',
+      critique: 'The discussion explains the concepts well, but it remains mostly theoretical and does not yet demonstrate how the ideas behave on an actual text dataset or product workflow.',
+      alternative: 'I would pair the written explanation with a small comparison using the same text samples, showing how tokenization, sentiment scoring, and context change the result.',
+      goals: {
+        shortTerm: 'Create a small sentiment analysis script and document what happens when the input text is ambiguous or informal.',
+        longTerm: 'Apply NLP to a useful business tool where language data can support faster, clearer, and more informed decisions.',
+      },
+    },
+    previews: [{
+      label: 'PDF Preview',
+      href: 'https://drive.google.com/file/d/1pRnyWby-CAK_5VjjxWADHBFV3yg7J2no/preview',
+    }],
+    resources: [],
+  },
+  {
+    id: 'pt-p1',
+    exerciseLabel: 'Hands-on Exercise',
+    exerciseCode: 'PT-P1',
+    title: 'Deep Learning (Neural Networks)',
+    date: 'Jul 23rd',
+    week: 'WEEK 03 · Jul 27–Aug 01',
+    status: 'Returned',
+    description: 'An exercise introducing deep learning and modelling: building and training a neural network, understanding layers, activation functions, loss, and how a model learns from data.',
+    skills: [
+      'Building neural network models',
+      'Understanding layers, weights, and activation functions',
+      'Training and evaluating a model',
+      'Interpreting training results',
+    ],
+    reflection: {
+      growth: 'I moved from describing neural networks to working with their actual building blocks: layers, weights, activations, loss, and evaluation. Seeing the training process change the model made the theory more concrete.',
+      critique: 'Getting the network to train successfully can make the task feel finished, but a working run alone does not explain whether the model learned a useful pattern or simply fit the training data.',
+      alternative: 'I would establish a simple baseline first, record both training and validation behavior, and explain one prediction so the final result is supported by evidence rather than output alone.',
+      goals: {
+        shortTerm: 'Practice reading loss and accuracy curves and write a short explanation of what they reveal about model learning.',
+        longTerm: 'Develop reliable machine learning solutions that combine implementation skill with careful interpretation of results.',
+      },
+    },
+    previews: [{
+      label: 'PDF Preview',
+      href: 'https://drive.google.com/file/d/1lcO8esEgqBJVAZ-GdtLSDNus9JyjS0LH/preview',
+    }],
+    resources: [],
+  },
+  {
+    id: 'pt-p2',
+    exerciseLabel: 'Performance Task',
+    exerciseCode: 'PT-P2',
+    title: 'Neural Network Training and Testing (Hyperparameters)',
+    date: 'Jul 30th',
+    week: 'WEEK 04 · Aug 03–08',
+    status: 'Returned',
+    description: 'A performance task on neural network training and testing: tuning hyperparameters such as learning rate, batch size, and number of layers to improve a model’s performance, then testing the trained model.',
+    skills: [
+      'Hyperparameter tuning: learning rate, batch size, and layers',
+      'Training versus testing evaluation',
+      'Reading training curves and metrics',
+      'Systematic experimentation',
+    ],
+    reflection: {
+      growth: 'I learned that model improvement is an experimental process. Learning rate, batch size, and layer choices each influence training behavior, so performance needs to be compared using consistent measurements.',
+      critique: 'It is easy to focus on the best score and overlook why a configuration performed differently. The experiment would be stronger with a clearer record of each run and a discussion of trade-offs such as speed, stability, and generalization.',
+      alternative: 'I would change one major variable at a time, keep an experiment table, and select the final configuration using validation results instead of relying only on the final test outcome.',
+      goals: {
+        shortTerm: 'Run a small controlled set of hyperparameter experiments and summarize the result of each change.',
+        longTerm: 'Use reproducible evaluation practices when developing data-driven systems for real users and business needs.',
+      },
+    },
+    previews: [
+      {
+        label: 'PDF Preview',
+        href: 'https://drive.google.com/file/d/1du6pIigU2I0OeYATRO4DGZwjsQcX3C9t/preview',
+      },
+    ],
+    notebook: {
+      href: 'https://colab.research.google.com/drive/19uADROHaJl2LE3Cno25ps7dCl_Edzih5',
+    },
+    resources: [],
   },
 ]
 
-const periodTabs = ['prelim', 'midterm', 'finals']
-const outputMap = { prelim: [], midterm: [], finals: [] }
+const midtermOutputs = [
+  {
+    id: 'pt-m1-rag',
+    exerciseLabel: 'Lab Exercise',
+    exerciseCode: 'PT-M1',
+    title: 'Building and Evaluating a RAG Chatbot',
+    date: 'Sep 9th',
+    week: 'WEEK 08 · Aug 31–Sep 05',
+    status: 'Turned in',
+    description: 'Build and evaluate a Retrieval-Augmented Generation (RAG) chatbot as an introduction to large language models and LLM operations.',
+    skills: [
+      'RAG chatbot design and implementation',
+      'Connecting retrieval with large language model responses',
+      'Evaluating chatbot answers for relevance and quality',
+      'Understanding foundational LLM Ops workflows',
+    ],
+    reflection: {
+      growth: 'I learned how retrieval and generation work together in a RAG chatbot. The activity helped me see that a useful answer depends not only on the language model, but also on the quality and relevance of the information retrieved for it.',
+      critique: 'A chatbot can sound convincing even when its retrieved context is incomplete or poorly matched. The evaluation should therefore challenge the system with questions that expose unsupported answers, missing information, and retrieval mistakes.',
+      alternative: 'I would create a small evaluation set before improving the chatbot, compare answers with and without retrieved context, and record evidence for relevance, groundedness, and reliability.',
+      goals: {
+        shortTerm: 'Expand the chatbot evaluation with edge cases and inspect which retrieved passages support each answer.',
+        longTerm: 'Build trustworthy AI applications that combine strong user experience with measurable, grounded, and maintainable LLM Ops practices.',
+      },
+    },
+    resources: [],
+  },
+]
+
+const outputMap = { prelim: prelimOutputs, midterm: midtermOutputs, finals: [] }
 
 function HomePage() {
   const [outputTab, setOutputTab] = useState('prelim')
@@ -229,45 +374,6 @@ function HomePage() {
         </div>
       </MotionSection>
 
-      {/* ─── C508 Records ─── */}
-      <MotionSection
-        id="c508"
-        variants={stagger}
-        initial="hidden"
-        animate="show"
-        className="bg-section-b border-y border-[var(--card-border)] transition-colors"
-      >
-        <div className="max-w-6xl mx-auto px-6 sm:px-10 py-20 sm:py-28">
-          <MotionDiv variants={fadeUp}>
-            <span className="chip text-xs">ITC-C508</span>
-            <h2 className="huge-text mt-4 text-4xl sm:text-5xl">Course<br />Records</h2>
-            <p className="mt-4 max-w-2xl text-[var(--muted)]">Academic workspace for E-Business: Higher Education and Intelligence Applications.</p>
-          </MotionDiv>
-
-          <MotionDiv variants={stagger} className="mt-12 space-y-4">
-            {c508Records.map((record) => (
-              <MotionArticle key={record.id} variants={fadeUp} className="rounded-2xl border border-[var(--card-border)] bg-card p-5 sm:p-6">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <div className="flex items-center gap-3 flex-wrap">
-                      <span className="text-xs font-semibold uppercase tracking-widest text-[var(--accent)]">{record.type}</span>
-                      <span className={`chip !text-[10px] ${
-                        record.status === 'Submitted' ? '!bg-emerald-500/10 !text-emerald-600 dark:!text-emerald-400' : ''
-                      }`}>
-                        {record.status === 'Submitted' && <CheckCircle className="mr-0.5 inline h-2.5 w-2.5" />}
-                        {record.status}
-                      </span>
-                    </div>
-                    <h3 className="mt-2 text-lg font-semibold">{record.title}</h3>
-                    <p className="mt-1 text-sm text-[var(--muted)]">{record.description}</p>
-                  </div>
-                </div>
-              </MotionArticle>
-            ))}
-          </MotionDiv>
-        </div>
-      </MotionSection>
-
       {/* ─── Outputs ─── */}
       <MotionSection
         id="outputs"
@@ -280,7 +386,7 @@ function HomePage() {
           <MotionDiv variants={fadeUp}>
             <span className="chip text-xs">{outputTab.charAt(0).toUpperCase() + outputTab.slice(1)}</span>
             <h2 className="huge-text mt-4 text-4xl sm:text-5xl">Outputs</h2>
-            <p className="mt-4 text-[var(--muted)]">Browse course projects by period.</p>
+            <p className="mt-4 max-w-2xl text-[var(--muted)]">Browse lab activities, written outputs, and performance tasks by period. Each entry includes its learning reflection.</p>
           </MotionDiv>
 
           <MotionDiv variants={fadeUp} className="mt-8 flex flex-wrap gap-2">
@@ -305,10 +411,107 @@ function HomePage() {
               <div className="space-y-4">
                 {outputMap[outputTab].map((item) => (
                   <MotionArticle key={item.id} variants={fadeUp} className="rounded-2xl border border-[var(--card-border)] bg-card p-5 sm:p-6">
-                    <p className="text-xs font-semibold uppercase tracking-widest text-[var(--accent)]">
-                      {[item.exerciseLabel, item.exerciseCode].filter(Boolean).join(' ')}
-                    </p>
-                    <h3 className="mt-1 text-lg font-semibold">{item.title}</h3>
+                    <div className="flex flex-wrap items-start justify-between gap-4">
+                      <div>
+                        <div className="flex flex-wrap items-center gap-2">
+                          <p className="text-xs font-semibold uppercase tracking-widest text-[var(--accent)]">
+                            {[item.exerciseLabel, item.exerciseCode].filter(Boolean).join(' ')}
+                          </p>
+                          <span className="chip !text-[10px] !bg-emerald-500/10 !text-emerald-600">{item.status}</span>
+                        </div>
+                        <h3 className="mt-2 text-xl font-semibold sm:text-2xl">{item.title}</h3>
+                        <p className="mt-1 text-xs font-medium uppercase tracking-wider text-[var(--muted)]">{item.week} · {item.date}</p>
+                      </div>
+                    </div>
+
+                    {item.previews?.length > 0 && (
+                      <div className={`mt-5 border-t border-[var(--card-border)] pt-5 ${item.notebook ? 'grid gap-4 md:grid-cols-2' : ''}`}>
+                        {item.previews.map((preview) => (
+                          <div key={preview.label}>
+                            <p className="text-xs font-semibold uppercase tracking-widest text-[var(--accent)]">{preview.label}</p>
+                            <div className="mt-3 overflow-hidden rounded-xl border border-[var(--card-border)] bg-[var(--page-bg)]">
+                              <iframe
+                                src={preview.href}
+                                title={`${item.title} ${preview.label.toLowerCase()}`}
+                                className="h-[360px] w-full sm:h-[460px]"
+                              />
+                            </div>
+                          </div>
+                        ))}
+                        {item.notebook && (
+                          <div>
+                            <p className="text-xs font-semibold uppercase tracking-widest text-[var(--accent)]">Notebook</p>
+                            <div className="mt-3 flex min-h-[360px] flex-col items-center justify-center rounded-xl border border-[var(--card-border)] bg-[var(--page-bg)] p-6 text-center sm:min-h-[460px]">
+                              <BookOpen className="h-8 w-8 text-[var(--accent)]" aria-hidden="true" />
+                              <p className="mt-4 text-sm font-semibold">No preview available</p>
+                              <p className="mt-1 max-w-xs text-xs text-[var(--muted)]">Open the notebook file to view the activity.</p>
+                              <a href={item.notebook.href} target="_blank" rel="noreferrer" className="mt-4 inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-4 py-2 text-xs font-semibold text-white transition hover:brightness-110">
+                                Open notebook
+                                <ExternalLink className="h-3 w-3" aria-hidden="true" />
+                              </a>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    <div className="mt-5 grid gap-6 border-t border-[var(--card-border)] pt-5 lg:grid-cols-[1.1fr,0.9fr]">
+                      <div>
+                        <p className="text-sm leading-relaxed text-[var(--muted)]">{item.description}</p>
+                        <div className="mt-5">
+                          <p className="text-xs font-semibold uppercase tracking-widest text-[var(--accent)]">Skills developed</p>
+                          <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+                            {item.skills.map((skill) => (
+                              <li key={skill} className="flex gap-2 text-sm text-[var(--muted)]">
+                                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]" aria-hidden="true" />
+                                <span>{skill}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+
+                      <div className="space-y-4">
+                        <details className="group rounded-xl border border-[var(--card-border)] bg-[var(--page-bg)] p-4">
+                          <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-semibold marker:hidden">
+                            <BookOpen className="h-4 w-4 text-[var(--accent)]" aria-hidden="true" />
+                            <span>Read reflection</span>
+                            <ChevronDown className="ml-auto h-4 w-4 text-[var(--muted)] transition-transform group-open:rotate-180" aria-hidden="true" />
+                          </summary>
+                          <div className="mt-4 space-y-4 border-t border-[var(--card-border)] pt-4">
+                            {[
+                              ['Growth', item.reflection.growth],
+                              ['Critique', item.reflection.critique],
+                              ['Alternative approach', item.reflection.alternative],
+                            ].map(([label, text]) => (
+                              <div key={label}>
+                                <p className="text-xs font-semibold uppercase tracking-widest text-[var(--accent)]">{label}</p>
+                                <p className="mt-1 text-sm leading-relaxed text-[var(--muted)]">{text}</p>
+                              </div>
+                            ))}
+                            <div>
+                              <p className="text-xs font-semibold uppercase tracking-widest text-[var(--accent)]">Goals</p>
+                              <p className="mt-1 text-sm leading-relaxed text-[var(--muted)]"><span className="font-semibold text-[var(--page-text)]">Short-term:</span> {item.reflection.goals.shortTerm}</p>
+                              <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]"><span className="font-semibold text-[var(--page-text)]">Long-term:</span> {item.reflection.goals.longTerm}</p>
+                            </div>
+                          </div>
+                        </details>
+
+                        {item.resources.length > 0 ? (
+                          <div className="flex flex-wrap gap-2">
+                            {item.resources.map((resource) => (
+                              <a key={resource.label} href={resource.href} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[var(--card-border)] px-4 py-2 text-xs font-semibold text-[var(--accent)] transition hover:bg-[var(--accent-subtle)]">
+                                <FileText className="h-3.5 w-3.5" aria-hidden="true" />
+                                {resource.label}
+                                <ExternalLink className="h-3 w-3" aria-hidden="true" />
+                              </a>
+                            ))}
+                          </div>
+                        ) : !item.previews?.length ? (
+                          <p className="text-xs text-[var(--muted)]">PDF and notebook links will be added here.</p>
+                        ) : null}
+                      </div>
+                    </div>
                   </MotionArticle>
                 ))}
               </div>

@@ -13,7 +13,7 @@ const navItems = [
 function SiteLayout() {
   const [darkMode, setDarkMode] = useState(() => {
     const saved = localStorage.getItem('theme')
-    return saved ? saved === 'dark' : false
+    return saved ? saved === 'dark' : true
   })
   const [activeSection, setActiveSection] = useState('')
   const observerRef = useRef(null)
@@ -43,7 +43,7 @@ function SiteLayout() {
     <div className="min-h-screen bg-ambient text-[var(--page-text)] antialiased flex flex-col transition-colors pb-20 sm:pb-0">
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-[var(--accent)] focus:px-4 focus:py-2.5 focus:text-white focus:text-sm focus:font-semibold"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-[var(--accent)] focus:px-4 focus:py-2.5 focus:text-[var(--accent-contrast)] focus:text-sm focus:font-semibold"
       >
         Skip to main content
       </a>
@@ -53,9 +53,10 @@ function SiteLayout() {
           type="button"
           onClick={() => setDarkMode((prev) => !prev)}
           className="rounded-full border border-[var(--card-border)] bg-nav backdrop-blur-xl p-2.5 text-[var(--muted)] transition hover:text-[var(--page-text)]"
-          aria-label="Toggle theme"
+          aria-label="Dark mode"
+          aria-pressed={darkMode}
         >
-          {darkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+          {darkMode ? <Sun className="h-4 w-4" aria-hidden="true" /> : <Moon className="h-4 w-4" aria-hidden="true" />}
         </button>
       </div>
 
@@ -76,11 +77,12 @@ function SiteLayout() {
               <a
                 key={item.href}
                 href={item.href}
+                aria-current={isActive ? 'location' : undefined}
                 className={`flex flex-col items-center gap-0.5 rounded-xl px-3 py-1.5 text-[10px] font-medium transition ${
                   isActive ? 'text-[var(--accent)]' : 'text-[var(--muted)]'
                 }`}
               >
-                <Icon className="h-5 w-5" />
+                <Icon className="h-5 w-5" aria-hidden="true" />
                 {item.label}
               </a>
             )
@@ -96,6 +98,7 @@ function SiteLayout() {
               <a
                 key={item.href}
                 href={item.href}
+                aria-current={isActive ? 'location' : undefined}
                 className={`rounded-full px-4 py-1.5 text-xs font-medium transition ${
                   isActive ? 'bg-[var(--accent-subtle)] text-[var(--accent)]' : 'text-[var(--muted)] hover:text-[var(--page-text)]'
                 }`}

@@ -10,9 +10,15 @@
     --page-text: #1a1410;
     --card-bg: #ffffff;
     --card-border: rgba(0, 0, 0, 0.06);
-    --accent: #d46a3d;
-    --accent-subtle: rgba(212, 106, 61, 0.08);
-    --muted: #78716c;
+    /* Accent passes WCAG AA both as text on the cream/white surfaces (4.9:1+)
+       and as a solid background behind --accent-contrast (5.5:1). */
+    --accent: #ad4a1f;
+    --accent-contrast: #ffffff;
+    --accent-subtle: rgba(173, 74, 31, 0.08);
+    --muted: #6b6560;
+    --danger: #b91c1c;
+    --status-bg: rgba(5, 150, 105, 0.12);
+    --status-text: #047857;
     --nav-bg: rgba(245, 240, 235, 0.9);
     --section-a: #f5f0eb;
     --section-b: #ede8e2;
@@ -24,8 +30,13 @@
     --card-bg: rgba(28, 25, 23, 0.7);
     --card-border: rgba(255, 255, 255, 0.06);
     --accent: #e8845c;
+    /* Dark text keeps the accent buttons readable in dark mode (2.7:1 -> 6:1+). */
+    --accent-contrast: #1a120c;
     --accent-subtle: rgba(232, 132, 92, 0.1);
     --muted: #a8a29e;
+    --danger: #fca5a5;
+    --status-bg: rgba(110, 231, 183, 0.12);
+    --status-text: #6ee7b7;
     --nav-bg: rgba(18, 12, 8, 0.9);
     --section-a: #120c08;
     --section-b: #1a1410;
@@ -57,7 +68,7 @@
 
   ::selection {
     background: var(--accent);
-    color: #fff;
+    color: var(--accent-contrast);
   }
 }
 
@@ -66,11 +77,16 @@
   .bg-section-a { background-color: var(--section-a); }
   .bg-section-b { background-color: var(--section-b); }
   .bg-card { background-color: var(--card-bg); border-color: var(--card-border); }
-  .text-accent { color: var(--accent); }
-  .border-accent { border-color: var(--accent); }
-  .bg-accent-subtle { background-color: var(--accent-subtle); }
-  .text-muted { color: var(--muted); }
   .bg-nav { background-color: var(--nav-bg); }
+
+  .text-danger { color: var(--danger); }
+
+  /* Solid accent surface: text colour is paired with the background token so
+     the pair stays legible in both themes. */
+  .btn-accent {
+    background-color: var(--accent);
+    color: var(--accent-contrast);
+  }
 
   .huge-text {
     font-family: 'Syne', system-ui, sans-serif;
@@ -90,12 +106,19 @@
     border: 1px solid var(--card-border);
   }
 
-  .animate-in {
-    animation: fadeSlideIn 0.4s ease-out;
+  .status-pill {
+    display: inline-block;
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    background: var(--status-bg);
+    color: var(--status-text);
   }
 
-  @keyframes fadeSlideIn {
-    from { opacity: 0; transform: translateY(12px); }
-    to { opacity: 1; transform: translateY(0); }
+  .status-pill--neutral {
+    background: var(--accent-subtle);
+    color: var(--accent);
   }
 }

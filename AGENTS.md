@@ -13,7 +13,7 @@
 
 | Command | What it does |
 |---|---|
-| `npm run dev` | Dev server at `127.0.0.1:5173` (strict port) |
+| `npm run dev` | Dev server at `127.0.0.1:5174` (strict port) |
 | `npm run build` | Outputs to `dist/` |
 | `npm run lint` | ESLint only |
 | `npm run preview` | Preview production build |

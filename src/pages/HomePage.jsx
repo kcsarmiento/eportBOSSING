@@ -1,22 +1,22 @@
 import { useRef, useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowRight, BookOpen, ChevronDown, ExternalLink, Send } from 'lucide-react'
 
 const MotionSection = motion.section
 const MotionDiv = motion.div
 const MotionArticle = motion.article
 
-const fadeUp = {
+const entranceVariants = {
   hidden: { opacity: 0, y: 16 },
   show: { opacity: 1, y: 0, transition: { duration: 0.35, ease: 'easeOut' } },
 }
 
-const stagger = {
+const staggerVariants = {
   hidden: { opacity: 0 },
   show: { opacity: 1, transition: { staggerChildren: 0.07 } },
 }
 
-const viewport = { once: true, amount: 0.15 }
+const viewport = { once: true, amount: 'some' }
 
 const identity = {
   name: 'John Klien Villanueva',
@@ -230,6 +230,14 @@ const prelimOutputs = [
       href: 'https://drive.google.com/file/d/19uADROHaJl2LE3Cno25ps7dCl_Edzih5/view?usp=sharing',
     },
   },
+  {
+    id: 'prelim-exam',
+    kind: 'exam',
+    exerciseLabel: 'Examination',
+    title: 'Prelim Exam',
+    author: identity.name,
+    score: { earned: 12, total: 30 },
+  },
 ]
 
 const midtermOutputs = [
@@ -302,6 +310,44 @@ const midtermOutputs = [
         href: 'https://docs.google.com/presentation/d/1w3vHwrCHMfVFlnrh4FlMVb_0eRE5fXk2/embed?start=false&loop=false&delayms=3000',
       },
     ],
+  },
+  {
+    id: 'ww-m2-ext',
+    exerciseLabel: 'Lab Exercise',
+    exerciseCode: 'WW-M2 Ext',
+    title: 'WW-M2 Extension — Updated HandaBot Proposal',
+    author: 'Carl Angelo Patano, Jonas Joaquin Sibug, and John Klien Villanueva',
+    group: true,
+    description: 'The revised concept paper proposes a RAG chatbot for flood preparedness and response information in Marikina City. It adds the Marikina Citizen’s Charter 2022 as the local source, proposes the NDRRMP 2020–2030 and NDRP 2024 as national references, and uses a dated DSWD Carina report as supplementary historical context. The planned evaluation compares the same language model with and without retrieval on a separate development set and a 60-question test set. Live river levels, evacuation status, and rescue dispatch are outside the proposed document-based scope.',
+    skills: [
+      'Narrowing a research problem to a defined community and information need',
+      'Checking source editions, dates, geographic coverage, and evidence limits',
+      'Designing a controlled RAG versus non-RAG comparison',
+      'Planning English, Filipino, and Taglish evaluation questions',
+      'Separating correctness, groundedness, citation support, and abstention',
+    ],
+    reflection: {
+      growth: 'Revising the proposal helped me connect the intended user to the actual source material. Moving the focus to Marikina flood preparedness and response made a city-issued service document necessary, alongside the national plans. I learned to specify which questions the corpus could support and when the chatbot should direct someone to current official channels.',
+      critique: 'The revised plan is more specific, but the source manifest, local editions, annotated questions, and model feasibility still need to be checked before the proposed experiment. A published procedure or historical situation report cannot establish what is happening during a current emergency, and a planned 60-question benchmark is not a completed evaluation.',
+      alternative: 'I would first freeze a small, verified corpus and test representative resident questions against it. I would use the development questions to finalize retrieval settings, reserve the test set for the final comparison, and have two reviewers independently check the reference answers and evidence locations.',
+      goals: {
+        shortTerm: 'Verify the proposed local and national sources, document their inclusion decisions, and prepare the development questions with page-level evidence.',
+        longTerm: 'Build locally relevant information tools with clear source boundaries and evaluation results that support the claims being made.',
+      },
+    },
+    previews: [{
+      label: 'Updated Proposal Paper',
+      href: 'https://docs.google.com/document/d/1N20VT52cM73o-8G9mDfso8nN8K0X-bW1/preview',
+      openHref: 'https://docs.google.com/document/d/1N20VT52cM73o-8G9mDfso8nN8K0X-bW1/edit',
+    }],
+  },
+  {
+    id: 'midterm-exam',
+    kind: 'exam',
+    exerciseLabel: 'Examination',
+    title: 'Midterm Exam',
+    author: identity.name,
+    score: { earned: 13, total: 30 },
   },
 ]
 
@@ -376,7 +422,7 @@ const finalsOutputs = [
     title: 'Tuning Chunk Size, Overlap and Top-K on HandaBot',
     author: identity.name,
     status: 'submitted',
-    description: 'The optimization pass for the HandaBot capstone: the NDRRMP 2020–2030 PDF is split with LangChain, embedded into Chroma, and answered with Qwen2.5-1.5B-Instruct under three configurations, 400/50 with top-k 3, 800/100, and 1200/150, which became the final chatbot settings.',
+    description: 'The optimization pass for the HandaBot capstone: the NDRRMP 2020–2030 PDF is split with LangChain, embedded into Chroma, and answered with Qwen2.5-1.5B-Instruct under three configurations, 400/50 with top-k 3, 800/100, and 1200/150, which were used for the lab chatbot. The later final-project experiment compares five configurations and selects its own settings.',
     skills: [
       'Running a full RAG pipeline over official DRRM documents',
       'Comparing chunk size and overlap with a fresh index per configuration',
@@ -433,7 +479,168 @@ const finalsOutputs = [
   },
 ]
 
-const outputMap = { prelim: prelimOutputs, midterm: midtermOutputs, finals: finalsOutputs }
+const finalProject = {
+  id: 'p-f1-handabot',
+  exerciseLabel: 'Group Final Project',
+  exerciseCode: 'P-F1',
+  title: 'HandaBot — A RAG Chatbot for the NDRRMP 2020–2030',
+  author: 'Carl Angelo Patano, Jonas Joaquin Sibug, and John Klien Villanueva',
+  group: true,
+  description: 'The final HandaBot project turns the 136-page National Disaster Risk Reduction and Management Plan 2020–2030 into a question-answering system using LangChain, all-MiniLM-L6-v2 embeddings, Chroma, and Qwen2.5-1.5B-Instruct on a Colab T4 GPU. Five configurations were compared on 15 questions: 12 answerable and 3 deliberately unanswerable. The recorded experiment selected 800-character chunks, 100-character overlap, and top-k 5. The IEEE paper reports a final manual chatbot evaluation of 19/30 points and 10 of 15 answers supported by the retrieved passages.',
+  skills: [
+    'Logging each pipeline stage and saving inspectable checkpoints',
+    'Comparing configurations with a documented selection rule',
+    'Exporting experiment logs, evaluation tables, and reproducibility files',
+    'Building a notebook chat interface with source pages and response times',
+    'Explaining retrieval failures and generation errors separately',
+    'Writing an IEEE report with results, tables, and figures',
+  ],
+  reflection: {
+    growth: 'My work connected the experiment to its evidence. I wrote the stage logging, checkpoint and export code, the configuration comparison and selection, and the notebook chatbot interface, then documented the results in the IEEE report. Recording what happened at each stage made the final choice easier to explain: configuration E tied B on automatic correct behaviour, while its retrieval recall rose from 0.542 to 0.625.',
+    critique: 'The final result still has clear limits. The paper reports only 2 of 8 possible points on difficult questions, and several answers mixed up agencies even when useful pages were retrieved. Fifteen questions, one manual scorer, and one Colab session are a narrow basis for a recommendation. The one-point manual-score difference between E and B does not establish a decisive winner.',
+    alternative: 'I would expand the evaluation set, add an independent reviewer, and inspect errors before changing more parameters. I would test hybrid retrieval and reranking for missed evidence, then separately test a pillar-aware prompt for agency confusion. The saved logs and checkpoints would let me compare each change against the same recorded baseline.',
+    goals: {
+      shortTerm: 'Add held-out questions and a second scorer, then verify that the exported files can reproduce the comparison from a fresh environment.',
+      longTerm: 'Build information systems whose answers, limitations, and configuration choices can be checked by another person.',
+    },
+  },
+  previews: [{
+    label: 'IEEE Paper',
+    href: 'https://docs.google.com/document/d/1CZgYWjfyn_X7K59HuX4jTlOQTPUyG7Zl/preview',
+    openHref: 'https://docs.google.com/document/d/1CZgYWjfyn_X7K59HuX4jTlOQTPUyG7Zl/edit',
+  }],
+  notebook: {
+    href: 'https://drive.google.com/file/d/1_p0hAwNRmGqQ1z7I0AU450LgboltWSKT/view?usp=sharing',
+  },
+}
+
+const finalProjectReflection = {
+  id: 'final-project-reflection',
+  kind: 'reflection',
+  exerciseLabel: 'Final Project Reflection',
+  title: 'Final Project Learning Reflection Post',
+  author: identity.name,
+  description: 'My contributions to HandaBot, what the experiment taught me about trustworthy answers, and the skills I developed while turning a notebook run into inspectable evidence.',
+  sections: [
+    {
+      title: 'My contributions',
+      text: 'My main responsibility was making the work traceable and understandable. I wrote the stage logging, checkpoint and export code, the comparison and configuration-selection logic, and the notebook chatbot interface. I also prepared the experiment log workbook and wrote the IEEE report with its tables and figures. Carl built and ran the main RAG pipeline, while Jonas prepared the evaluation questions and carried out the manual scoring. Seeing those responsibilities come together taught me that a final project needs a clear connection between the implementation, the evidence, and the explanation.',
+    },
+    {
+      title: 'What I learned',
+      text: 'The most useful lesson was that a configuration choice needs more than a good-looking answer. Run E used 800-character chunks, 100-character overlap, and five retrieved chunks. Its retrieval recall was 0.625, compared with 0.542 for the three-chunk reference setting, while both had an automatic correct-behaviour rate of 0.667. The paper reports a manual chatbot score of 19/30, including 7 fully correct, 5 partly correct, and 3 incorrect answers. Those different views of the same run showed me why retrieval coverage, correctness, and faithfulness need to be explained separately.',
+    },
+    {
+      title: 'Skills I developed',
+      text: 'I became more deliberate about recording timestamps, settings, stage timings, retrieved passages, and generated answers. I practiced exporting that information into spreadsheets and checkpoints that another person could inspect, and translating the comparison into tables, figures, and a written argument. The notebook interface also gave me a practical way to present source pages, response times, and errors alongside an answer. I learned to treat the interface and the report as ways of exposing the evidence, rather than simply presenting the best result.',
+    },
+    {
+      title: 'What I would improve next',
+      text: 'I would start the next iteration with more held-out questions and two independent scorers. Difficult questions remained the weakest part of HandaBot, and the paper shows that even a retrieved passage can be used incorrectly when the model confuses agencies or pillars. I would use the saved outputs to separate missing evidence from generation mistakes, then change one part at a time. My goal is to make each improvement reproducible and to explain what the system can support without treating a small experiment as proof of general reliability.',
+    },
+  ],
+}
+
+const finalsById = Object.fromEntries(finalsOutputs.map((item) => [item.id, item]))
+
+const optimizationLab = {
+  id: 'ww-f1-f2',
+  exerciseLabel: 'Lab Exercise',
+  exerciseCode: 'WW1 & WW2',
+  title: 'Optimizing RAG Parameters and Comparing CPU and GPU Performance',
+  author: identity.name,
+  status: 'submitted',
+  previews: finalsById['ww-f1'].previews,
+  notebook: finalsById['ww-f1'].notebook,
+  parts: [
+    { ...finalsById['ww-f1'], partLabel: 'Part A — RAG parameter optimization' },
+    { ...finalsById['ww-f2'], partLabel: 'Part B — CPU and GPU comparison' },
+  ],
+}
+
+const outputMap = {
+  prelim: [...prelimOutputs].reverse(),
+  midterm: [...midtermOutputs].reverse(),
+  finals: [finalProjectReflection, finalProject, optimizationLab, finalsById['pt-f2'], finalsById['pt-f1']],
+}
+
+function getDocumentHref(preview) {
+  if (preview.openHref) return preview.openHref
+  const destination = preview.href.includes('docs.google.com/') ? '/edit' : '/view'
+  return preview.href.replace(/\/(preview|embed)(\?.*)?$/, destination)
+}
+
+function ActivityContent({ item }) {
+  return (
+    <div className="mt-5 border-t border-[var(--card-border)] pt-5">
+      {item.partLabel && <h4 className="mb-4 text-lg font-semibold">{item.partLabel}</h4>}
+      <div className="grid gap-6 lg:grid-cols-[1.1fr,0.9fr]">
+        <div>
+          <p className="text-sm leading-relaxed text-[var(--muted)]">{item.description}</p>
+          <div className="mt-5">
+            <p className="text-xs font-semibold uppercase tracking-widest text-[var(--accent)]">Skills developed</p>
+            <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+              {item.skills.map((skill) => (
+                <li key={skill} className="flex gap-2 text-sm text-[var(--muted)]">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]" aria-hidden="true" />
+                  <span>{skill}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <details className="group self-start rounded-xl border border-[var(--card-border)] bg-[var(--page-bg)] p-4">
+          <summary className="flex min-h-11 cursor-pointer list-none items-center gap-2 text-sm font-semibold marker:hidden">
+            <BookOpen className="h-4 w-4 shrink-0 text-[var(--accent)]" aria-hidden="true" />
+            <span>{item.partLabel ? `Read reflection: ${item.partLabel.split(' — ')[0]}` : 'Read reflection'}</span>
+            <ChevronDown className="ml-auto h-4 w-4 shrink-0 text-[var(--muted)] transition-transform group-open:rotate-180" aria-hidden="true" />
+          </summary>
+          <div className="mt-4 space-y-4 border-t border-[var(--card-border)] pt-4">
+            {[
+              ['Growth', item.reflection.growth],
+              ['Critique', item.reflection.critique],
+              ['Alternative approach', item.reflection.alternative],
+            ].map(([label, text]) => (
+              <div key={label}>
+                <p className="text-xs font-semibold uppercase tracking-widest text-[var(--accent)]">{label}</p>
+                <p className="mt-1 text-sm leading-relaxed text-[var(--muted)]">{text}</p>
+              </div>
+            ))}
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-widest text-[var(--accent)]">Goals</p>
+              <p className="mt-1 text-sm leading-relaxed text-[var(--muted)]"><span className="font-semibold text-[var(--page-text)]">Short-term:</span> {item.reflection.goals.shortTerm}</p>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]"><span className="font-semibold text-[var(--page-text)]">Long-term:</span> {item.reflection.goals.longTerm}</p>
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+  )
+}
+
+function LearningReflectionPost({ item }) {
+  return (
+    <div className="mt-5 border-t border-[var(--card-border)] pt-5">
+      <p className="max-w-[72ch] text-sm leading-relaxed text-[var(--muted)]">{item.description}</p>
+      <details className="group mt-5">
+        <summary className="flex min-h-11 cursor-pointer list-none items-center gap-2 text-sm font-semibold marker:hidden">
+          <BookOpen className="h-4 w-4 text-[var(--accent)]" aria-hidden="true" />
+          <span>Read full post</span>
+          <ChevronDown className="ml-2 h-4 w-4 text-[var(--muted)] transition-transform group-open:rotate-180" aria-hidden="true" />
+        </summary>
+        <div className="mt-5 max-w-[72ch] space-y-6">
+          {item.sections.map((section) => (
+            <section key={section.title}>
+              <h4 className="text-lg font-semibold">{section.title}</h4>
+              <p className="mt-2 text-base leading-relaxed text-[var(--muted)]">{section.text}</p>
+            </section>
+          ))}
+        </div>
+      </details>
+    </div>
+  )
+}
 
 const contactFields = [
   { name: 'name', label: 'Name', type: 'text', autoComplete: 'name' },
@@ -441,6 +648,13 @@ const contactFields = [
 ]
 
 function HomePage() {
+  const reduceMotion = useReducedMotion()
+  const fadeUp = reduceMotion
+    ? { hidden: { opacity: 1, y: 0 }, show: { opacity: 1, y: 0 } }
+    : entranceVariants
+  const stagger = reduceMotion
+    ? { hidden: { opacity: 1 }, show: { opacity: 1 } }
+    : staggerVariants
   const [outputTab, setOutputTab] = useState('prelim')
   const [contactForm, setContactForm] = useState({ name: '', email: '', message: '' })
   const [contactErrors, setContactErrors] = useState({})
@@ -511,13 +725,13 @@ function HomePage() {
         initial="hidden"
         whileInView="show"
         viewport={viewport}
-        className="min-h-screen flex items-center px-6 sm:px-10"
+        className="min-h-[min(900px,100svh)] flex items-center px-6 py-24 sm:px-10 sm:py-32"
       >
-        <div className="w-full max-w-6xl mx-auto grid gap-10 lg:grid-cols-[minmax(0,1fr),auto] items-center">
-          <div>
+        <div className="w-full max-w-6xl mx-auto grid gap-10 lg:gap-16 lg:grid-cols-[minmax(0,1fr),auto] items-center">
+          <div className="min-w-0">
             <MotionDiv variants={fadeUp} className="max-w-4xl">
               <span className="chip text-xs tracking-widest uppercase">{identity.course}</span>
-              <h1 className="huge-text mt-6 text-[clamp(2rem,9.8vw,3.5rem)] leading-[0.9] lg:text-[clamp(3rem,7vw,7rem)]">
+              <h1 className="huge-text mt-6 text-[clamp(2rem,9vw,3.5rem)] leading-[1.05] lg:text-[clamp(3rem,5.1vw,5rem)]">
                 {identity.name.split(' ')[0]}<br />
                 {identity.name.split(' ').slice(1).join(' ')}
               </h1>
@@ -532,15 +746,15 @@ function HomePage() {
                 View outputs
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </a>
-              <a href={`mailto:${identity.email}`} className="inline-flex items-center gap-2 rounded-full border border-[var(--card-border)] bg-card px-5 py-2.5 text-sm font-semibold transition hover:text-[var(--accent)]">
+              <a href={`mailto:${identity.email}`} className="inline-flex min-h-11 items-center gap-2 rounded-full border border-[var(--card-border)] bg-card px-5 py-2.5 text-sm font-semibold transition hover:text-[var(--accent)]">
                 Email me
               </a>
             </MotionDiv>
           </div>
 
           <MotionDiv variants={fadeUp} className="shrink-0">
-            <div className="relative h-48 w-48 sm:h-64 sm:w-64 overflow-hidden rounded-3xl border border-[var(--card-border)] bg-card">
-              <img src="/bossing.png" alt="John Klien Villanueva, BSIT student, standing outdoors" className="h-full w-full object-cover" />
+            <div className="relative h-48 w-48 sm:h-64 sm:w-64 lg:h-72 lg:w-72 overflow-hidden rounded-2xl border border-[var(--card-border)] bg-card">
+              <img src="/bossing.png" width="288" height="288" fetchPriority="high" alt="John Klien Villanueva, BSIT student, standing outdoors" className="h-full w-full object-cover" />
             </div>
           </MotionDiv>
         </div>
@@ -557,8 +771,7 @@ function HomePage() {
       >
         <div className="max-w-6xl mx-auto px-6 sm:px-10 py-20 sm:py-28">
           <MotionDiv variants={fadeUp}>
-            <span className="chip text-xs">ITC-C508</span>
-            <h2 className="huge-text mt-4 text-[clamp(1.5rem,7.7vw,1.875rem)] sm:text-5xl">Course<br />Expectations</h2>
+            <h2 id="c508" className="huge-text scroll-mt-24 text-[clamp(1.5rem,8vw,2.25rem)] sm:text-5xl">Course<br />Expectations</h2>
             <p className="mt-4 max-w-2xl text-[var(--muted)]">
               Responses to the required readings on deep learning and NLP.
             </p>
@@ -568,8 +781,8 @@ function HomePage() {
             {courseQA.map((item) => (
               <MotionDiv key={item.id} variants={fadeUp} className="rounded-2xl border border-[var(--card-border)] bg-card p-6 sm:p-8">
                 <p className="text-xs font-semibold uppercase tracking-widest text-[var(--accent)]">{item.label}</p>
-                <p className="mt-2 text-xl font-semibold sm:text-2xl">{item.question}</p>
-                <div className="mt-5 border-t border-[var(--card-border)] pt-5 text-sm leading-relaxed text-[var(--muted)]">
+                <h3 className="mt-2 max-w-[55ch] text-xl font-semibold sm:text-2xl">{item.question}</h3>
+                <div className="mt-5 max-w-[72ch] border-t border-[var(--card-border)] pt-5 text-base leading-relaxed text-[var(--muted)]">
                   {item.answer}
                 </div>
               </MotionDiv>
@@ -589,8 +802,7 @@ function HomePage() {
       >
         <div className="max-w-6xl mx-auto px-6 sm:px-10 py-20 sm:py-28">
           <MotionDiv variants={fadeUp}>
-            <span className="chip text-xs">About</span>
-            <h2 className="huge-text mt-4 text-[clamp(1.5rem,7.7vw,1.875rem)] sm:text-5xl">
+            <h2 className="huge-text text-[clamp(1.5rem,8vw,2.25rem)] sm:text-5xl">
               Background<br />&amp; Skills
             </h2>
             <p className="mt-4 max-w-2xl text-[var(--muted)]">{identity.about}</p>
@@ -627,13 +839,12 @@ function HomePage() {
       >
         <div className="max-w-6xl mx-auto px-6 sm:px-10 py-20 sm:py-28">
           <MotionDiv variants={fadeUp}>
-            <span className="chip text-xs">ITC-C508</span>
-            <h2 className="huge-text mt-4 text-[clamp(1.5rem,7.7vw,1.875rem)] sm:text-5xl">Outputs</h2>
-            <p className="mt-4 max-w-2xl text-[var(--muted)]">Browse lab activities, written outputs, and performance tasks by period. Each entry includes its learning reflection.</p>
+            <h2 className="huge-text text-[clamp(1.5rem,8vw,2.25rem)] sm:text-5xl">Outputs</h2>
+            <p className="mt-4 max-w-2xl text-[var(--muted)]">Browse exams, lab activities, and project work by period, with the latest entries first. Find the final project and learning reflection in Finals.</p>
           </MotionDiv>
 
           <MotionDiv variants={fadeUp}>
-            <div role="tablist" aria-label="Output period" className="mt-8 flex flex-wrap gap-2">
+            <div role="tablist" aria-label="Output period" className="mt-8 flex gap-1.5 sm:gap-2">
               {periodTabs.map((tab, index) => {
                 const selected = outputTab === tab
                 return (
@@ -645,17 +856,18 @@ function HomePage() {
                     role="tab"
                     aria-selected={selected}
                     aria-controls="outputs-panel"
-                    aria-label={`${periodLabel[tab]} outputs`}
+                    aria-label={`${periodLabel[tab]} outputs, ${outputMap[tab].length} entries`}
                     tabIndex={selected ? 0 : -1}
                     onClick={() => setOutputTab(tab)}
                     onKeyDown={(event) => handleTabKeyDown(event, index)}
-                    className={`rounded-full px-5 py-2 text-sm font-semibold transition ${
+                    className={`min-h-11 min-w-0 flex-1 rounded-full px-2 py-2 text-sm font-semibold transition sm:flex-none sm:px-5 ${
                       selected
                         ? 'btn-accent'
                         : 'border border-[var(--card-border)] bg-card text-[var(--muted)] hover:text-[var(--page-text)]'
                     }`}
                   >
                     {periodLabel[tab]}
+                    <span className="ml-1.5 text-xs tabular-nums">{outputMap[tab].length}</span>
                   </button>
                 )
               })}
@@ -673,16 +885,18 @@ function HomePage() {
               {outputMap[outputTab].length > 0 ? (
                 <div className="space-y-4">
                   {outputMap[outputTab].map((item) => (
-                    <MotionArticle key={item.id} variants={fadeUp} className="rounded-2xl border border-[var(--card-border)] bg-card p-5 sm:p-6">
+                    <MotionArticle key={item.id} id={`output-${item.id}`} variants={fadeUp} className="scroll-mt-24 rounded-2xl border border-[var(--card-border)] bg-card p-5 sm:p-6">
                       <div className="flex flex-wrap items-start justify-between gap-4">
                         <div>
                           <div className="flex flex-wrap items-center gap-2">
                             <p className="text-xs font-semibold uppercase tracking-widest text-[var(--accent)]">
                               {[item.exerciseLabel, item.exerciseCode].filter(Boolean).join(' ')}
                             </p>
-                            <span className={`status-pill ${item.status === 'submitted' ? 'status-pill--neutral' : ''}`}>
-                              {statusLabel[item.status]}
-                            </span>
+                            {item.status && (
+                              <span className={`status-pill ${item.status === 'submitted' ? 'status-pill--neutral' : ''}`}>
+                                {statusLabel[item.status]}
+                              </span>
+                            )}
                           </div>
                           <h3 className="mt-2 text-xl font-semibold sm:text-2xl">{item.title}</h3>
                           <p className="mt-2 text-xs font-semibold text-[var(--page-text)]">{item.group ? 'Authors' : 'Author'}: {item.author}</p>
@@ -692,11 +906,24 @@ function HomePage() {
                         </div>
                       </div>
 
+                      {item.kind === 'exam' && (
+                        <dl className="mt-5 flex flex-wrap items-baseline justify-between gap-3 border-t border-[var(--card-border)] pt-5">
+                          <dt className="text-sm font-medium text-[var(--muted)]">Exam score</dt>
+                          <dd className="text-3xl font-semibold tabular-nums">
+                            {item.score.earned}<span className="text-xl font-normal text-[var(--muted)]"> / {item.score.total}</span>
+                          </dd>
+                        </dl>
+                      )}
                       {item.previews?.length > 0 && (
-                        <div className={`mt-5 border-t border-[var(--card-border)] pt-5 ${item.notebook ? 'grid gap-4 md:grid-cols-2' : ''}`}>
+                        <div className="mt-5 space-y-4 border-t border-[var(--card-border)] pt-5">
                           {item.previews.map((preview) => (
                             <div key={preview.label}>
-                              <p className="text-xs font-semibold uppercase tracking-widest text-[var(--accent)]">{preview.label}</p>
+                              <div className="flex flex-wrap items-center justify-between gap-x-4">
+                                <p className="text-xs font-semibold uppercase tracking-widest text-[var(--accent)]">{preview.label}</p>
+                                <a href={getDocumentHref(preview)} target="_blank" rel="noreferrer" aria-label={`Open ${item.title} ${preview.label} in a new tab`} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[var(--accent)] underline hover:no-underline">
+                                  Open document <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                                </a>
+                              </div>
                               <div className="mt-3 overflow-hidden rounded-xl border border-[var(--card-border)] bg-[var(--page-bg)]">
                                 <iframe
                                   src={preview.href}
@@ -709,12 +936,15 @@ function HomePage() {
                           ))}
                           {item.notebook && (
                             <div>
-                              <p className="text-xs font-semibold uppercase tracking-widest text-[var(--accent)]">Notebook</p>
-                              <div className="mt-3 flex min-h-[360px] flex-col items-center justify-center rounded-xl border border-[var(--card-border)] bg-[var(--page-bg)] p-6 text-center sm:min-h-[460px]">
-                                <BookOpen className="h-8 w-8 text-[var(--accent)]" aria-hidden="true" />
-                                <p className="mt-4 text-sm font-semibold">No preview available</p>
-                                <p className="mt-1 max-w-xs text-xs text-[var(--muted)]">Open the notebook file to view the activity.</p>
-                                <a href={item.notebook.href} target="_blank" rel="noreferrer" className="btn-accent mt-4 inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold transition hover:brightness-110">
+                              <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[var(--card-border)] py-4">
+                                <div className="flex items-center gap-3">
+                                  <BookOpen className="h-5 w-5 shrink-0 text-[var(--accent)]" aria-hidden="true" />
+                                  <div>
+                                    <p className="text-sm font-semibold">Notebook</p>
+                                    <p className="text-sm text-[var(--muted)]">Open the notebook file to view the activity.</p>
+                                  </div>
+                                </div>
+                                <a href={item.notebook.href} target="_blank" rel="noreferrer" className="btn-accent inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition hover:brightness-110">
                                   Open notebook
                                   <ExternalLink className="h-3 w-3" aria-hidden="true" />
                                 </a>
@@ -724,49 +954,10 @@ function HomePage() {
                         </div>
                       )}
 
-                      <div className="mt-5 grid gap-6 border-t border-[var(--card-border)] pt-5 lg:grid-cols-[1.1fr,0.9fr]">
-                        <div>
-                          <p className="text-sm leading-relaxed text-[var(--muted)]">{item.description}</p>
-                          <div className="mt-5">
-                            <p className="text-xs font-semibold uppercase tracking-widest text-[var(--accent)]">Skills developed</p>
-                            <ul className="mt-3 grid gap-2 sm:grid-cols-2">
-                              {item.skills.map((skill) => (
-                                <li key={skill} className="flex gap-2 text-sm text-[var(--muted)]">
-                                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]" aria-hidden="true" />
-                                  <span>{skill}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        </div>
-
-                        <div className="space-y-4">
-                          <details className="group rounded-xl border border-[var(--card-border)] bg-[var(--page-bg)] p-4">
-                            <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-semibold marker:hidden">
-                              <BookOpen className="h-4 w-4 text-[var(--accent)]" aria-hidden="true" />
-                              <span>Read reflection</span>
-                              <ChevronDown className="ml-auto h-4 w-4 text-[var(--muted)] transition-transform group-open:rotate-180" aria-hidden="true" />
-                            </summary>
-                            <div className="mt-4 space-y-4 border-t border-[var(--card-border)] pt-4">
-                              {[
-                                ['Growth', item.reflection.growth],
-                                ['Critique', item.reflection.critique],
-                                ['Alternative approach', item.reflection.alternative],
-                              ].map(([label, text]) => (
-                                <div key={label}>
-                                  <p className="text-xs font-semibold uppercase tracking-widest text-[var(--accent)]">{label}</p>
-                                  <p className="mt-1 text-sm leading-relaxed text-[var(--muted)]">{text}</p>
-                                </div>
-                              ))}
-                              <div>
-                                <p className="text-xs font-semibold uppercase tracking-widest text-[var(--accent)]">Goals</p>
-                                <p className="mt-1 text-sm leading-relaxed text-[var(--muted)]"><span className="font-semibold text-[var(--page-text)]">Short-term:</span> {item.reflection.goals.shortTerm}</p>
-                                <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]"><span className="font-semibold text-[var(--page-text)]">Long-term:</span> {item.reflection.goals.longTerm}</p>
-                              </div>
-                            </div>
-                          </details>
-                        </div>
-                      </div>
+                      {item.kind === 'reflection' && <LearningReflectionPost item={item} />}
+                      {item.kind !== 'exam' && item.kind !== 'reflection' && (
+                        (item.parts || [item]).map((part) => <ActivityContent key={part.id} item={part} />)
+                      )}
                     </MotionArticle>
                   ))}
                 </div>
@@ -793,8 +984,7 @@ function HomePage() {
       >
         <div className="max-w-3xl mx-auto px-6 sm:px-10 py-20 sm:py-28">
           <MotionDiv variants={fadeUp} className="text-center">
-            <span className="chip text-xs">Contact</span>
-            <h2 className="huge-text mt-4 text-[clamp(1.5rem,7.7vw,1.875rem)] sm:text-5xl">Get in Touch</h2>
+            <h2 className="huge-text text-[clamp(1.5rem,8vw,2.25rem)] sm:text-5xl">Get in Touch</h2>
             <p className="mt-4 text-[var(--muted)]">Have a question? Send a message and it will open in your email app.</p>
           </MotionDiv>
 
@@ -808,12 +998,13 @@ function HomePage() {
                       id={field.name}
                       name={field.name}
                       type={field.type}
+                      required
                       autoComplete={field.autoComplete}
                       value={contactForm[field.name]}
                       onChange={handleContactChange}
                       aria-invalid={contactErrors[field.name] ? 'true' : undefined}
                       aria-describedby={contactErrors[field.name] ? `${field.name}-error` : undefined}
-                      className="w-full rounded-xl border border-[var(--card-border)] bg-[var(--page-bg)] px-4 py-2.5 text-sm outline-none transition focus:border-[var(--accent)]"
+                      className="min-h-11 w-full rounded-xl border border-[var(--card-border)] bg-[var(--page-bg)] px-4 py-2.5 text-base transition focus:border-[var(--accent)]"
                     />
                     {contactErrors[field.name] && (
                       <p id={`${field.name}-error`} role="alert" className="mt-1 text-xs text-danger">
@@ -829,11 +1020,13 @@ function HomePage() {
                   id="message"
                   name="message"
                   rows={4}
+                  required
+                  minLength={10}
                   value={contactForm.message}
                   onChange={handleContactChange}
                   aria-invalid={contactErrors.message ? 'true' : undefined}
                   aria-describedby={contactErrors.message ? 'message-error' : 'message-hint'}
-                  className="w-full rounded-xl border border-[var(--card-border)] bg-[var(--page-bg)] px-4 py-2.5 text-sm outline-none transition focus:border-[var(--accent)]"
+                  className="w-full rounded-xl border border-[var(--card-border)] bg-[var(--page-bg)] px-4 py-2.5 text-base transition focus:border-[var(--accent)]"
                 />
                 {contactErrors.message ? (
                   <p id="message-error" role="alert" className="mt-1 text-xs text-danger">{contactErrors.message}</p>
@@ -843,7 +1036,7 @@ function HomePage() {
               </div>
               <div className="flex flex-wrap items-center gap-4">
                 <button type="submit" className="btn-accent inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-semibold transition hover:brightness-110">
-                  <Send className="h-3.5 w-3.5" aria-hidden="true" /> Send
+                  <Send className="h-3.5 w-3.5" aria-hidden="true" /> Open email app
                 </button>
                 {contactMailto && (
                   <p role="status" className="text-sm text-[var(--muted)]">
@@ -854,7 +1047,7 @@ function HomePage() {
               </div>
             </form>
             <div className="mt-6 border-t border-[var(--card-border)] pt-6">
-              <a href={`mailto:${identity.email}`} className="text-sm text-[var(--accent)] hover:underline">{identity.email}</a>
+              <a href={`mailto:${identity.email}`} className="inline-flex min-h-11 items-center break-all text-sm text-[var(--accent)] hover:underline">{identity.email}</a>
             </div>
           </MotionDiv>
         </div>

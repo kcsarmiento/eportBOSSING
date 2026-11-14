@@ -1,0 +1,21 @@
+{
+  "activityReflections": 4,
+  "entries": 5,
+  "overflow": false,
+  "period": "Prelim",
+  "score": "12/30"
+}
+{
+  "activityReflections": 2,
+  "entries": 3,
+  "overflow": false,
+  "period": "Midterm",
+  "score": "13/30",
+  "viewport": 375
+}
+{
+  "activityReflections": 4,
+  "entries": 4,
+  "examEntries": 0,
+  "period": "Finals"
+}

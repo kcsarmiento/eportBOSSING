@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "createdAt": "2026-11-14T09:46:54.107Z",
+        "reason": "Agent audit decision: lowercase inter identifies the existing Google Fonts import for the retained Syne and Inter system in baseline c8fea00."
+      }
+    ]
+  }
+}

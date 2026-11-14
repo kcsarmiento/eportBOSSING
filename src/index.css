@@ -6,43 +6,46 @@
 
 @layer base {
   :root {
-    --page-bg: #f5f0eb;
-    --page-text: #1a1410;
+    color-scheme: light;
+    --page-bg: #f2f8f7;
+    --page-text: #142e30;
     --card-bg: #ffffff;
-    --card-border: rgba(0, 0, 0, 0.06);
-    /* Accent passes WCAG AA both as text on the cream/white surfaces (4.9:1+)
-       and as a solid background behind --accent-contrast (5.5:1). */
-    --accent: #ad4a1f;
+    --card-border: rgba(20, 65, 65, 0.16);
+    --accent: #0b6e69;
     --accent-contrast: #ffffff;
-    --accent-subtle: rgba(173, 74, 31, 0.08);
-    --muted: #6b6560;
+    --accent-subtle: rgba(11, 110, 105, 0.08);
+    --muted: #506669;
     --danger: #b91c1c;
     --status-bg: rgba(5, 150, 105, 0.12);
     --status-text: #047857;
-    --nav-bg: rgba(245, 240, 235, 0.9);
-    --section-a: #f5f0eb;
-    --section-b: #ede8e2;
+    --nav-bg: rgba(242, 248, 247, 0.95);
+    --section-a: #f2f8f7;
+    --section-b: #e6f0ee;
   }
 
   html.dark {
-    --page-bg: #120c08;
-    --page-text: #e7e5e4;
-    --card-bg: rgba(28, 25, 23, 0.7);
-    --card-border: rgba(255, 255, 255, 0.06);
-    --accent: #e8845c;
-    /* Dark text keeps the accent buttons readable in dark mode (2.7:1 -> 6:1+). */
-    --accent-contrast: #1a120c;
-    --accent-subtle: rgba(232, 132, 92, 0.1);
-    --muted: #a8a29e;
+    color-scheme: dark;
+    --page-bg: #0b181b;
+    --page-text: #e5f0ef;
+    --card-bg: #122428;
+    --card-border: rgba(181, 221, 220, 0.16);
+    --accent: #65d8cb;
+    --accent-contrast: #0b2728;
+    --accent-subtle: rgba(101, 216, 203, 0.1);
+    --muted: #a3babd;
     --danger: #fca5a5;
     --status-bg: rgba(110, 231, 183, 0.12);
     --status-text: #6ee7b7;
-    --nav-bg: rgba(18, 12, 8, 0.9);
-    --section-a: #120c08;
-    --section-b: #1a1410;
+    --nav-bg: rgba(11, 24, 27, 0.95);
+    --section-a: #0b181b;
+    --section-b: #0e1e22;
   }
 
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    scrollbar-color: var(--muted) var(--page-bg);
+  }
 
   body {
     margin: 0;
@@ -58,6 +61,16 @@
     font-family: 'Syne', system-ui, sans-serif;
     font-weight: 700;
     letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  input, textarea { caret-color: var(--accent); }
+  a { text-underline-offset: 0.2em; }
+  summary::-webkit-details-marker { display: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    body, a, button, input, textarea, section, svg { transition: none !important; }
   }
 
   *:focus-visible {
@@ -86,6 +99,7 @@
   .btn-accent {
     background-color: var(--accent);
     color: var(--accent-contrast);
+    min-height: 44px;
   }
 
   .huge-text {
@@ -120,5 +134,17 @@
   .status-pill--neutral {
     background: var(--accent-subtle);
     color: var(--accent);
+  }
+
+  .mobile-navigation {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .site-shell {
+    padding-bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  @media (min-width: 640px) {
+    .site-shell { padding-bottom: 0; }
   }
 }

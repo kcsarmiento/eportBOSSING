@@ -1,0 +1,32 @@
+{
+  "counts": [
+    5,
+    4,
+    5
+  ],
+  "examScore": "13/30",
+  "order": [
+    "output-midterm-exam",
+    "output-ww-m2-ext",
+    "output-ww-m2",
+    "output-pt-m1-rag"
+  ],
+  "overflow": false,
+  "paperLink": "https://docs.google.com/document/d/1N20VT52cM73o-8G9mDfso8nN8K0X-bW1/edit",
+  "result": "PASS",
+  "title": "WW-M2 Extension — Updated HandaBot Proposal"
+}
+{
+  "keyboardReflection": "PASS",
+  "overflow": [],
+  "result": "PASS",
+  "theme": "dark",
+  "viewport": 320
+}
+{
+  "keyboardReflection": "PASS",
+  "overflow": [],
+  "result": "PASS",
+  "theme": "light",
+  "viewport": 375
+}

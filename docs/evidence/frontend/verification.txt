@@ -1,0 +1,724 @@
+✓ John Klien Villanueva — ePortfolio
+  http://127.0.0.1:4173/
+✓ Done
+http://127.0.0.1:4173/
+✓ Done
+{
+  "firstFocus": "Skip to main content",
+  "outline": "solid"
+}
+✓ Done
+{
+  "skipLink": "PASS"
+}
+✓ Done
+{
+  "contrasts": [
+    {
+      "bg": "--page-bg",
+      "fg": "--page-text",
+      "ratio": 15.54
+    },
+    {
+      "bg": "--page-bg",
+      "fg": "--muted",
+      "ratio": 8.89
+    },
+    {
+      "bg": "--page-bg",
+      "fg": "--accent",
+      "ratio": 10.54
+    },
+    {
+      "bg": "--card-bg",
+      "fg": "--page-text",
+      "ratio": 13.79
+    },
+    {
+      "bg": "--card-bg",
+      "fg": "--muted",
+      "ratio": 7.88
+    },
+    {
+      "bg": "--card-bg",
+      "fg": "--accent",
+      "ratio": 9.35
+    },
+    {
+      "bg": "--section-b",
+      "fg": "--page-text",
+      "ratio": 14.7
+    },
+    {
+      "bg": "--section-b",
+      "fg": "--muted",
+      "ratio": 8.4
+    },
+    {
+      "bg": "--section-b",
+      "fg": "--accent",
+      "ratio": 9.97
+    },
+    {
+      "bg": "--accent",
+      "fg": "--accent-contrast",
+      "ratio": 9.17
+    }
+  ],
+  "documentWidth": 320,
+  "overflow": [],
+  "reducedMotion": true,
+  "scrollBehavior": "auto",
+  "smallTargets": [],
+  "theme": "dark",
+  "viewport": [
+    320,
+    568
+  ]
+}
+✓ Done
+{
+  "contrasts": [
+    {
+      "bg": "--page-bg",
+      "fg": "--page-text",
+      "ratio": 15.54
+    },
+    {
+      "bg": "--page-bg",
+      "fg": "--muted",
+      "ratio": 8.89
+    },
+    {
+      "bg": "--page-bg",
+      "fg": "--accent",
+      "ratio": 10.54
+    },
+    {
+      "bg": "--card-bg",
+      "fg": "--page-text",
+      "ratio": 13.79
+    },
+    {
+      "bg": "--card-bg",
+      "fg": "--muted",
+      "ratio": 7.88
+    },
+    {
+      "bg": "--card-bg",
+      "fg": "--accent",
+      "ratio": 9.35
+    },
+    {
+      "bg": "--section-b",
+      "fg": "--page-text",
+      "ratio": 14.7
+    },
+    {
+      "bg": "--section-b",
+      "fg": "--muted",
+      "ratio": 8.4
+    },
+    {
+      "bg": "--section-b",
+      "fg": "--accent",
+      "ratio": 9.97
+    },
+    {
+      "bg": "--accent",
+      "fg": "--accent-contrast",
+      "ratio": 9.17
+    }
+  ],
+  "documentWidth": 375,
+  "overflow": [],
+  "reducedMotion": true,
+  "scrollBehavior": "auto",
+  "smallTargets": [],
+  "theme": "dark",
+  "viewport": [
+    375,
+    812
+  ]
+}
+✓ Done
+{
+  "contrasts": [
+    {
+      "bg": "--page-bg",
+      "fg": "--page-text",
+      "ratio": 15.54
+    },
+    {
+      "bg": "--page-bg",
+      "fg": "--muted",
+      "ratio": 8.89
+    },
+    {
+      "bg": "--page-bg",
+      "fg": "--accent",
+      "ratio": 10.54
+    },
+    {
+      "bg": "--card-bg",
+      "fg": "--page-text",
+      "ratio": 13.79
+    },
+    {
+      "bg": "--card-bg",
+      "fg": "--muted",
+      "ratio": 7.88
+    },
+    {
+      "bg": "--card-bg",
+      "fg": "--accent",
+      "ratio": 9.35
+    },
+    {
+      "bg": "--section-b",
+      "fg": "--page-text",
+      "ratio": 14.7
+    },
+    {
+      "bg": "--section-b",
+      "fg": "--muted",
+      "ratio": 8.4
+    },
+    {
+      "bg": "--section-b",
+      "fg": "--accent",
+      "ratio": 9.97
+    },
+    {
+      "bg": "--accent",
+      "fg": "--accent-contrast",
+      "ratio": 9.17
+    }
+  ],
+  "documentWidth": 640,
+  "overflow": [],
+  "reducedMotion": true,
+  "scrollBehavior": "auto",
+  "smallTargets": [],
+  "theme": "dark",
+  "viewport": [
+    640,
+    900
+  ]
+}
+✓ Done
+{
+  "contrasts": [
+    {
+      "bg": "--page-bg",
+      "fg": "--page-text",
+      "ratio": 15.54
+    },
+    {
+      "bg": "--page-bg",
+      "fg": "--muted",
+      "ratio": 8.89
+    },
+    {
+      "bg": "--page-bg",
+      "fg": "--accent",
+      "ratio": 10.54
+    },
+    {
+      "bg": "--card-bg",
+      "fg": "--page-text",
+      "ratio": 13.79
+    },
+    {
+      "bg": "--card-bg",
+      "fg": "--muted",
+      "ratio": 7.88
+    },
+    {
+      "bg": "--card-bg",
+      "fg": "--accent",
+      "ratio": 9.35
+    },
+    {
+      "bg": "--section-b",
+      "fg": "--page-text",
+      "ratio": 14.7
+    },
+    {
+      "bg": "--section-b",
+      "fg": "--muted",
+      "ratio": 8.4
+    },
+    {
+      "bg": "--section-b",
+      "fg": "--accent",
+      "ratio": 9.97
+    },
+    {
+      "bg": "--accent",
+      "fg": "--accent-contrast",
+      "ratio": 9.17
+    }
+  ],
+  "documentWidth": 768,
+  "overflow": [],
+  "reducedMotion": true,
+  "scrollBehavior": "auto",
+  "smallTargets": [],
+  "theme": "dark",
+  "viewport": [
+    768,
+    1024
+  ]
+}
+✓ Done
+{
+  "contrasts": [
+    {
+      "bg": "--page-bg",
+      "fg": "--page-text",
+      "ratio": 15.54
+    },
+    {
+      "bg": "--page-bg",
+      "fg": "--muted",
+      "ratio": 8.89
+    },
+    {
+      "bg": "--page-bg",
+      "fg": "--accent",
+      "ratio": 10.54
+    },
+    {
+      "bg": "--card-bg",
+      "fg": "--page-text",
+      "ratio": 13.79
+    },
+    {
+      "bg": "--card-bg",
+      "fg": "--muted",
+      "ratio": 7.88
+    },
+    {
+      "bg": "--card-bg",
+      "fg": "--accent",
+      "ratio": 9.35
+    },
+    {
+      "bg": "--section-b",
+      "fg": "--page-text",
+      "ratio": 14.7
+    },
+    {
+      "bg": "--section-b",
+      "fg": "--muted",
+      "ratio": 8.4
+    },
+    {
+      "bg": "--section-b",
+      "fg": "--accent",
+      "ratio": 9.97
+    },
+    {
+      "bg": "--accent",
+      "fg": "--accent-contrast",
+      "ratio": 9.17
+    }
+  ],
+  "documentWidth": 1024,
+  "overflow": [],
+  "reducedMotion": true,
+  "scrollBehavior": "auto",
+  "smallTargets": [],
+  "theme": "dark",
+  "viewport": [
+    1024,
+    768
+  ]
+}
+✓ Done
+{
+  "contrasts": [
+    {
+      "bg": "--page-bg",
+      "fg": "--page-text",
+      "ratio": 15.54
+    },
+    {
+      "bg": "--page-bg",
+      "fg": "--muted",
+      "ratio": 8.89
+    },
+    {
+      "bg": "--page-bg",
+      "fg": "--accent",
+      "ratio": 10.54
+    },
+    {
+      "bg": "--card-bg",
+      "fg": "--page-text",
+      "ratio": 13.79
+    },
+    {
+      "bg": "--card-bg",
+      "fg": "--muted",
+      "ratio": 7.88
+    },
+    {
+      "bg": "--card-bg",
+      "fg": "--accent",
+      "ratio": 9.35
+    },
+    {
+      "bg": "--section-b",
+      "fg": "--page-text",
+      "ratio": 14.7
+    },
+    {
+      "bg": "--section-b",
+      "fg": "--muted",
+      "ratio": 8.4
+    },
+    {
+      "bg": "--section-b",
+      "fg": "--accent",
+      "ratio": 9.97
+    },
+    {
+      "bg": "--accent",
+      "fg": "--accent-contrast",
+      "ratio": 9.17
+    }
+  ],
+  "documentWidth": 1440,
+  "overflow": [],
+  "reducedMotion": true,
+  "scrollBehavior": "auto",
+  "smallTargets": [],
+  "theme": "dark",
+  "viewport": [
+    1440,
+    1000
+  ]
+}
+✓ Done
+✓ Done
+{
+  "articleCount": 2,
+  "tab": "midterm"
+}
+✓ Done
+{
+  "articleCount": 4,
+  "fallbackLinks": 4,
+  "previews": 4,
+  "tab": "finals"
+}
+✓ Done
+✓ Done
+{
+  "reflection": "PASS"
+}
+✓ Done
+{
+  "focusedField": "name",
+  "invalidFields": 3
+}
+✓ Done
+http://127.0.0.1:4173/#main-content
+{
+  "themePersistence": "PASS"
+}
+null
+http://127.0.0.1:4173/#main-content
+✓ Done
+http://127.0.0.1:4173/#main-content
+{
+  "themePersistence": "PASS"
+}
+{
+  "contrasts": [
+    {
+      "bg": "--page-bg",
+      "fg": "--page-text",
+      "ratio": 13.36
+    },
+    {
+      "bg": "--page-bg",
+      "fg": "--muted",
+      "ratio": 5.67
+    },
+    {
+      "bg": "--page-bg",
+      "fg": "--accent",
+      "ratio": 5.67
+    },
+    {
+      "bg": "--card-bg",
+      "fg": "--page-text",
+      "ratio": 14.35
+    },
+    {
+      "bg": "--card-bg",
+      "fg": "--muted",
+      "ratio": 6.09
+    },
+    {
+      "bg": "--card-bg",
+      "fg": "--accent",
+      "ratio": 6.09
+    },
+    {
+      "bg": "--section-b",
+      "fg": "--page-text",
+      "ratio": 12.34
+    },
+    {
+      "bg": "--section-b",
+      "fg": "--muted",
+      "ratio": 5.24
+    },
+    {
+      "bg": "--section-b",
+      "fg": "--accent",
+      "ratio": 5.24
+    },
+    {
+      "bg": "--accent",
+      "fg": "--accent-contrast",
+      "ratio": 6.09
+    }
+  ],
+  "documentWidth": 1440,
+  "overflow": [],
+  "reducedMotion": true,
+  "scrollBehavior": "auto",
+  "smallTargets": [],
+  "theme": "",
+  "viewport": [
+    1440,
+    1000
+  ]
+}
+✓ Screenshot saved to D:\kxxF\Projects\Elective 4\eportBOSSING\docs\evidence\frontend\after-desktop-light.png
+✓ Done
+✓ Done
+null
+http://127.0.0.1:4173/#main-content
+✓ Done
+http://127.0.0.1:4173/#main-content
+{
+  "themePersistence": "PASS"
+}
+{
+  "contrasts": [
+    {
+      "bg": "--page-bg",
+      "fg": "--page-text",
+      "ratio": 13.36
+    },
+    {
+      "bg": "--page-bg",
+      "fg": "--muted",
+      "ratio": 5.67
+    },
+    {
+      "bg": "--page-bg",
+      "fg": "--accent",
+      "ratio": 5.67
+    },
+    {
+      "bg": "--card-bg",
+      "fg": "--page-text",
+      "ratio": 14.35
+    },
+    {
+      "bg": "--card-bg",
+      "fg": "--muted",
+      "ratio": 6.09
+    },
+    {
+      "bg": "--card-bg",
+      "fg": "--accent",
+      "ratio": 6.09
+    },
+    {
+      "bg": "--section-b",
+      "fg": "--page-text",
+      "ratio": 12.34
+    },
+    {
+      "bg": "--section-b",
+      "fg": "--muted",
+      "ratio": 5.24
+    },
+    {
+      "bg": "--section-b",
+      "fg": "--accent",
+      "ratio": 5.24
+    },
+    {
+      "bg": "--accent",
+      "fg": "--accent-contrast",
+      "ratio": 6.09
+    }
+  ],
+  "documentWidth": 1440,
+  "overflow": [],
+  "reducedMotion": true,
+  "scrollBehavior": "auto",
+  "smallTargets": [],
+  "theme": "",
+  "viewport": [
+    1440,
+    1000
+  ]
+}
+✓ Screenshot saved to D:\kxxF\Projects\Elective 4\eportBOSSING\docs\evidence\frontend\after-desktop-light.png
+✓ Done
+✓ Done
+null
+http://127.0.0.1:4173/#outputs
+✓ Done
+http://127.0.0.1:4173/#outputs
+{
+  "themePersistence": "PASS"
+}
+{
+  "contrasts": [
+    {
+      "bg": "--page-bg",
+      "fg": "--page-text",
+      "ratio": 13.36
+    },
+    {
+      "bg": "--page-bg",
+      "fg": "--muted",
+      "ratio": 5.67
+    },
+    {
+      "bg": "--page-bg",
+      "fg": "--accent",
+      "ratio": 5.67
+    },
+    {
+      "bg": "--card-bg",
+      "fg": "--page-text",
+      "ratio": 14.35
+    },
+    {
+      "bg": "--card-bg",
+      "fg": "--muted",
+      "ratio": 6.09
+    },
+    {
+      "bg": "--card-bg",
+      "fg": "--accent",
+      "ratio": 6.09
+    },
+    {
+      "bg": "--section-b",
+      "fg": "--page-text",
+      "ratio": 12.34
+    },
+    {
+      "bg": "--section-b",
+      "fg": "--muted",
+      "ratio": 5.24
+    },
+    {
+      "bg": "--section-b",
+      "fg": "--accent",
+      "ratio": 5.24
+    },
+    {
+      "bg": "--accent",
+      "fg": "--accent-contrast",
+      "ratio": 6.09
+    }
+  ],
+  "documentWidth": 1440,
+  "overflow": [],
+  "reducedMotion": true,
+  "scrollBehavior": "auto",
+  "smallTargets": [],
+  "theme": "",
+  "viewport": [
+    1440,
+    1000
+  ]
+}
+✓ Screenshot saved to D:\kxxF\Projects\Elective 4\eportBOSSING\docs\evidence\frontend\after-desktop-light.png
+✓ Done
+✓ Done
+{
+  "outputVisibility": "PASS"
+}
+✓ Screenshot saved to D:\kxxF\Projects\Elective 4\eportBOSSING\docs\evidence\frontend\after-mobile-outputs.png
+{
+  "contrasts": [
+    {
+      "bg": "--page-bg",
+      "fg": "--page-text",
+      "ratio": 13.36
+    },
+    {
+      "bg": "--page-bg",
+      "fg": "--muted",
+      "ratio": 5.67
+    },
+    {
+      "bg": "--page-bg",
+      "fg": "--accent",
+      "ratio": 5.67
+    },
+    {
+      "bg": "--card-bg",
+      "fg": "--page-text",
+      "ratio": 14.35
+    },
+    {
+      "bg": "--card-bg",
+      "fg": "--muted",
+      "ratio": 6.09
+    },
+    {
+      "bg": "--card-bg",
+      "fg": "--accent",
+      "ratio": 6.09
+    },
+    {
+      "bg": "--section-b",
+      "fg": "--page-text",
+      "ratio": 12.34
+    },
+    {
+      "bg": "--section-b",
+      "fg": "--muted",
+      "ratio": 5.24
+    },
+    {
+      "bg": "--section-b",
+      "fg": "--accent",
+      "ratio": 5.24
+    },
+    {
+      "bg": "--accent",
+      "fg": "--accent-contrast",
+      "ratio": 6.09
+    }
+  ],
+  "documentWidth": 375,
+  "overflow": [],
+  "reducedMotion": true,
+  "scrollBehavior": "auto",
+  "smallTargets": [],
+  "theme": "",
+  "viewport": [
+    375,
+    812
+  ]
+}
+✓ Done
+true
+✓ Screenshot saved to D:\kxxF\Projects\Elective 4\eportBOSSING\docs\evidence\frontend\after-mobile-contact.png

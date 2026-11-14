@@ -1,0 +1,127 @@
+✓ John Klien Villanueva — ePortfolio
+  http://127.0.0.1:4173/
+✓ Done
+null
+http://127.0.0.1:4173/
+✓ Done
+✓ Done
+{
+  "count": 5,
+  "examScore": "12/30",
+  "order": [
+    "prelim-exam",
+    "pt-p2",
+    "pt-p1",
+    "ww-p2",
+    "ww-p1"
+  ],
+  "period": "prelim",
+  "result": "PASS"
+}
+✓ Done
+✓ Done
+{
+  "count": 3,
+  "examScore": "13/30",
+  "order": [
+    "midterm-exam",
+    "ww-m2",
+    "pt-m1-rag"
+  ],
+  "period": "midterm",
+  "result": "PASS"
+}
+{
+  "proposalLinks": [
+    "https://docs.google.com/document/d/17Mbc7g0x33L3PITbLeAQGDN7k3ox4_hr/edit",
+    "https://docs.google.com/presentation/d/1IEhec1_O2Z-Pwob4SDI0Jw82Rxc0f9U6/edit",
+    "https://docs.google.com/presentation/d/1w3vHwrCHMfVFlnrh4FlMVb_0eRE5fXk2/edit"
+  ],
+  "result": "PASS"
+}
+✓ Done
+{
+  "count": 5,
+  "examScore": null,
+  "order": [
+    "final-project-reflection",
+    "p-f1-handabot",
+    "ww-f1-f2",
+    "pt-f2",
+    "pt-f1"
+  ],
+  "period": "finals",
+  "result": "PASS"
+}
+{
+  "interrupted": false
+}
+✓ Screenshot saved to D:\kxxF\Projects\Elective 4\eportBOSSING\docs\evidence\frontend\finals-sequence-desktop.png
+✓ Done
+✓ Done
+{
+  "keyboardExpansion": "PASS",
+  "reflectionSections": 4
+}
+✓ Done
+{
+  "documentWidth": 320,
+  "overflow": [],
+  "result": "PASS",
+  "smallTargets": 0,
+  "theme": "dark",
+  "viewport": [
+    320,
+    568
+  ]
+}
+✓ Done
+{
+  "documentWidth": 375,
+  "overflow": [],
+  "result": "PASS",
+  "smallTargets": 0,
+  "theme": "dark",
+  "viewport": [
+    375,
+    812
+  ]
+}
+✓ Done
+{
+  "documentWidth": 1440,
+  "overflow": [],
+  "result": "PASS",
+  "smallTargets": 0,
+  "theme": "dark",
+  "viewport": [
+    1440,
+    1000
+  ]
+}
+✓ Done
+{
+  "interrupted": false
+}
+✓ Screenshot saved to D:\kxxF\Projects\Elective 4\eportBOSSING\docs\evidence\frontend\final-reflection-mobile.png
+✓ Done
+✓ Done
+{
+  "documentWidth": 375,
+  "overflow": [],
+  "result": "PASS",
+  "smallTargets": 0,
+  "theme": "light",
+  "viewport": [
+    375,
+    812
+  ]
+}
+✓ Done
+{
+  "labReflection": "PASS"
+}
+{
+  "interrupted": false
+}
+✓ Screenshot saved to D:\kxxF\Projects\Elective 4\eportBOSSING\docs\evidence\frontend\final-project-mobile.png

@@ -13,3 +13,4 @@ dist-ssr
 *.sw?
 .vercel
 .env*.local
+.impeccable/hook.cache.json
